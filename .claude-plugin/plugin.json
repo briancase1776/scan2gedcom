@@ -1,0 +1,9 @@
+{
+  "name": "scan2gedcom",
+  "version": "0.1.0",
+  "description": "Turn a scanned family-history book into a page-by-page transcription, cited family group sheets, record files, structured data and a GEDCOM file.",
+  "author": { "name": "briancase1776" },
+  "repository": "https://github.com/briancase1776/scan2gedcom",
+  "license": "MIT",
+  "keywords": ["genealogy", "gedcom", "transcription", "family history", "ocr"]
+}

@@ -1,0 +1,93 @@
+DATA FORMAT
+Structured data for the family group sheets, one JSON file per sheet:
+data/<sheet-id>.json, from families/<sheet-id>.txt. The text sheets
+stay the readable version; these files feed tools/build_gedcom.py,
+which writes one GEDCOM 5.5.1 file for import into a family-tree
+program.
+Check with:  python3 -I tools/check_data.py
+
+FILE
+  {
+    "sheet":    "<sheet-id>",
+    "people":   [ PERSON, ... ],
+    "families": [ FAMILY, ... ]
+  }
+
+  A sheet's file holds its principal, the principal's spouses, the
+  principal's children (birth, death and burial only; their own
+  marriages belong to their own sheets) and the families in which the
+  principal is husband or wife. The same person may appear in several
+  files; the builder merges them by id.
+
+  Layout: one fact per line, as in examples/demo/data/. It keeps diffs
+  small and files easy to compare with the sheet.
+
+PERSON
+  {
+    "id":      "harlan-abel-1801",     the id used on the sheets
+    "given":   "Abel",
+    "surname": "Harlan",               maiden name for women, "" if
+                                       unknown
+    "aka":     ["Abe Harlan"],         optional: other names and
+                                       spellings
+    "sex":     "M" | "F" | "U",        from the book (son, daughter, he,
+                                       she, Mrs.); if it doesn't say,
+                                       from a clearly male or female
+                                       given name; U only if neither
+    "living":  "no" | "yes" | "check", as on the sheet's Living line
+    "facts":   [ FACT, ... ]
+  }
+
+FAMILY
+  {
+    "id":       "fam-<husband-id>-<wife-id>",   unique
+    "husband":  "<person id>" or null,
+    "wife":     "<person id>" or null,
+    "children": ["<person id>", ...],   in the sheet's order
+    "facts":    [ FACT, ... ]           MARR, DIV
+  }
+
+FACT
+  {
+    "type":   "BIRT" | "DEAT" | "BURI" | "MARR" | "DIV" | "RESI" |
+              "OCCU" | "RELI" | "EVEN",
+    "date":   "4 MAR 1801",    optional, GEDCOM form (see DATES)
+    "place":  "Linden Co.",    optional, as the sheet gives it
+    "value":  "...",           OCCU / RELI / EVEN: what it was
+    "kind":   "F" | "R" | "Q" | "I",   the sheet's tag
+    "cite":   ["PDF 2", "PDF 14"],     the book pages ("PDF 2-3" for a
+                                       range); may be empty only for I
+    "record": "rec-...",       optional: the record file it rests on
+    "note":   "..."            optional: the book's own words, a
+                               qualifier, or the reasoning for an [I]
+  }
+
+  Where the book disagrees with itself, write one fact per reading,
+  each with its own pages. Don't pick one.
+
+  A guess is not a vital event. The author's "possible", "perhaps" or
+  "rumored", or a place or date worked out on the sheet, goes in as an
+  EVEN fact whose value says so ("Possible death", "Possible burial",
+  "Possible birthplace", "Rumored residence"), never as BIRT, DEAT,
+  BURI or RESI, so a tree program doesn't show it as fact.
+
+MERGING
+  The builder merges a person's facts from all files, dropping exact
+  duplicates only. When the same event is in two files (a child in the
+  parents' file and in their own), the two fact objects must be
+  identical, or the event appears twice in the tree. If the child's
+  sheet has the better version (a record link, a fuller note), change
+  it in both files. check_data.py warns about near-duplicates.
+
+DATES  (GEDCOM 5.5.1)
+  4 MAR 1801      MAR 1801     1801
+  ABT 1774        BEF 1 MAR 1869     AFT 1820     EST 1800    CAL 1801
+  BET 1833 AND 1834     FROM 1819 TO 1851     FROM 1849     TO APR 1846
+  Months: JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC.
+  A date that won't fit (a typing slip, a "[?]" reading) goes in as
+  the best GEDCOM date with the book's text in "note"; if there is no
+  sensible date, leave "date" out and put the text in "note".
+
+RULES
+  Every fact comes from the sheet and carries its pages. Nothing is
+  added that the sheet doesn't say.

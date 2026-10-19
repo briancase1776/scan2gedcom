@@ -1,0 +1,56 @@
+{
+  "sheet": "harlan-abel-1801",
+  "people": [
+    {
+      "id": "harlan-abel-1801", "given": "Abel", "surname": "Harlan", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "4 MAR 1801", "place": "Linden Co.", "kind": "F", "cite": ["PDF 2"]},
+        {"type": "BIRT", "date": "14 MAR 1801", "kind": "R", "cite": ["PDF 4"], "record": "rec-harlan-family-bible", "note": "Family Bible: \"March 14[?] 1801\"; uncertain reading"},
+        {"type": "DEAT", "date": "9 OCT 1869", "kind": "F", "cite": ["PDF 2"]},
+        {"type": "BURI", "place": "Pell Creek burying ground", "kind": "F", "cite": ["PDF 2"], "note": "Ruth \"is buried beside him in the Pell Creek burying ground\""},
+        {"type": "OCCU", "value": "Farmer", "kind": "F", "cite": ["PDF 2"], "note": "\"a great hand with horses\""},
+        {"type": "EVEN", "value": "Deed: sold 80 acres on Pell Creek to his son Ezra, $200", "date": "2 MAR 1830", "place": "Linden Co.", "kind": "R", "cite": ["PDF 3"], "record": "rec-1830-03-02-deed-abel-ruth-harlan-to-ezra", "note": "With his wife Ruth; Deed Book B, p. 40"}
+      ]
+    },
+    {
+      "id": "pell-ruth-1805", "given": "Ruth", "surname": "Pell", "sex": "F", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "9 AUG 1805", "kind": "R", "cite": ["PDF 4"], "record": "rec-harlan-family-bible", "note": "Family Bible: \"Aug 9 1805\""},
+        {"type": "DEAT", "date": "1 FEB 1871", "kind": "F", "cite": ["PDF 2"]},
+        {"type": "BURI", "place": "Pell Creek burying ground", "kind": "F", "cite": ["PDF 2"], "note": "\"buried beside him in the Pell Creek burying ground\""},
+        {"type": "EVEN", "value": "Possible burial", "place": "Mt. Zion", "kind": "F", "cite": ["PDF 2"], "note": "\"but some say she was buried at Mt. Zion\""},
+        {"type": "EVEN", "value": "Deed: sold 80 acres on Pell Creek to her son Ezra, $200", "date": "2 MAR 1830", "place": "Linden Co.", "kind": "R", "cite": ["PDF 3"], "record": "rec-1830-03-02-deed-abel-ruth-harlan-to-ezra", "note": "With her husband Abel; signed by mark"}
+      ]
+    },
+    {
+      "id": "harlan-ezra-1825", "given": "Ezra", "surname": "Harlan", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "2 MAY 1825", "kind": "F", "cite": ["PDF 2"]},
+        {"type": "BIRT", "date": "2 MAY 1825", "kind": "R", "cite": ["PDF 4"], "record": "rec-harlan-family-bible", "note": "Family Bible: \"May 2 1825\""}
+      ]
+    },
+    {
+      "id": "harlan-lydia-1827", "given": "Lydia", "surname": "Harlan", "sex": "F", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "1827", "kind": "F", "cite": ["PDF 2"], "note": "\"b. ___ 1827\""}
+      ]
+    },
+    {
+      "id": "harlan-thomas-1830", "given": "Thomas", "surname": "Harlan", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "1830", "kind": "F", "cite": ["PDF 2"]},
+        {"type": "DEAT", "kind": "F", "cite": ["PDF 2"], "note": "\"d. young\"; no date"}
+      ]
+    }
+  ],
+  "families": [
+    {
+      "id": "fam-harlan-abel-1801-pell-ruth-1805",
+      "husband": "harlan-abel-1801", "wife": "pell-ruth-1805",
+      "children": ["harlan-ezra-1825", "harlan-lydia-1827", "harlan-thomas-1830"],
+      "facts": [
+        {"type": "MARR", "date": "12 JUN 1824", "place": "her father's house on Pell Creek", "kind": "F", "cite": ["PDF 2"]}
+      ]
+    }
+  ]
+}

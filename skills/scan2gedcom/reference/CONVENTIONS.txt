@@ -1,0 +1,80 @@
+TRANSCRIPTION CONVENTIONS
+<Title of the book>
+by <author>
+
+Source: <file>.pdf (<N> pages, scanned). Each page is transcribed by
+reading the page image. The PDF's built-in OCR text layer, if any, is
+used only as a cross-check, never as the source.
+
+(Copy this file to transcription/CONVENTIONS.txt and fill in the
+book. Add any rule the book needs here, so every worker follows it.)
+
+FILES
+  One file per PDF page: p001.txt, p002.txt, ... (three digits; four
+  if the book has 1000 pages or more).
+  Files are named by PDF page, not by the book's own page number,
+  because the book's numbering drifts from the PDF's and hand-numbered
+  pages repeat. Cite pages by PDF page.
+
+HEADER
+  Each file starts with a header, then a line of 64 dashes, then the
+  page:
+
+    PDF page:   2
+    Book page:  1          (the page number as shown, e.g. 8A for an
+                            inserted page; "none" if absent. If a page
+                            has both a typed and a handwritten number
+                            and they differ, give both, handwritten
+                            first: "128 (handwritten); 130 (typed)".)
+    Kind:       typed narrative
+    Notes:      (anything about the page itself; "none" if nothing)
+    ----------------------------------------------------------------
+
+  Kind is one of: cover, typed narrative, typed record (the author's
+  typed copy of a record), record copy (photocopy of a record, form or
+  index card), newspaper clipping, handwritten, photo, map, chart,
+  blank. A page can have more than one, separated by " + ". The
+  author's own numbered descendant lists count as typed narrative.
+
+  Problems with the scan itself (a missing page, a page scanned twice,
+  pages out of order) go in Notes, and in SCAN-NOTES.txt.
+
+BODY
+  - Word for word, line for line, as on the page.
+  - Spelling, punctuation, capitals and typing errors are kept exactly
+    as typed. Nothing is corrected here; corrections belong in the
+    group sheets.
+  - Spacing is not kept: runs of spaces are collapsed to one, and
+    paragraph indents are dropped. Blank lines between paragraphs are
+    kept.
+  - Underlined text is marked _like this_.
+  - Blanks typed for an unknown name or date are kept as underscores,
+    e.g. "m. ___ Stewart". (Underscores with no closing one are a
+    blank; _word_ is underlining.)
+  - Ditto marks are typed as ".
+  - Bold, a change of typeface, and highlighting are described in
+    Notes, not marked in the body.
+  - Names in handwriting are spelled exactly as written, even when the
+    typed pages spell them differently.
+  - Words hyphenated at a line end stay hyphenated, as on the page.
+  - Fractions as on the page: ½ stays ½.
+  - The page number at the top or bottom of the page goes in the
+    header only.
+  - Columns (lists, tables, estate sales) are separated with " | ".
+
+EDITORIAL MARKS (always in square brackets)
+  [illegible]            a word that cannot be read
+  [illegible: 3 words]   several words that cannot be read
+  word[?]                a reading that is uncertain
+  [photo: ...]           a photograph, with its caption or a description
+  [map: ...]             a map, described the same way; other pictures
+                         likewise, e.g. [advertisement: ...]
+  [handwritten: ...]     handwriting added to a typed page
+  [struck: ...]          text that is struck out but still readable
+  [margin: ...]          a note in the margin
+  [blank]                a page or space left blank
+  If the author typed square brackets, the Notes line says so.
+
+PRIVACY
+  The book may name living people. The transcription stays in a
+  private repository until living-people status has been checked.

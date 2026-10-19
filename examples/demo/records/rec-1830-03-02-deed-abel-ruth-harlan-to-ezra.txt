@@ -1,0 +1,30 @@
+RECORD                                                 TRIAL  -  draft 1
+Deed, Abel and Ruth Harlan to Ezra Harlan, 80 acres on Pell Creek, 1830
+Id:        rec-1830-03-02-deed-abel-ruth-harlan-to-ezra
+Type:      deed (sale, $200)
+Date:      2 Mar 1830
+Place:     Linden Co.; 80 acres on Pell Creek
+Original:  Linden Co. Deed Book B, p. 40 (as Ada cites it). Original
+           not seen.
+Form:      Ada's typed copy.
+In book:   PDF 3
+People:    Abel Harlan  (harlan-abel-1801)  grantor, signs
+           Ruth Harlan  (pell-ruth-1805)  grantor, signs by mark
+           Ezra Harlan  (harlan-ezra-1825)  grantee
+           Jno. Pell  witness
+Used on:   families/harlan-abel-1801.txt
+Shows:     The sale Ada describes on PDF 2 ("sold there land on Pell
+           Creek to Ezra in 1830"). Ezra was not yet five [I]: the
+           deed may be a family arrangement; the book does not say.
+----------------------------------------------------------------
+TEXT AS IN THE BOOK
+  [PDF 3, book page 2]
+    DEED - Linden Co. Deed Book B, p. 40
+
+    This Indenture made the 2nd day of March 1830 between Abel
+    Harlan and Ruth his wife of Linden County of the one part and
+    Ezra Harlan of the same of the other part, for $200, 80 acres
+    on Pell Creek.
+    Abel Harlan (seal)
+    Ruth (her X mark) Harlan (seal)
+    Witness: Jno. Pell

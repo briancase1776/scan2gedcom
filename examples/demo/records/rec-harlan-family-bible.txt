@@ -1,0 +1,23 @@
+RECORD                                                 TRIAL  -  draft 1
+Harlan family Bible, births
+Id:        rec-harlan-family-bible
+Type:      family Bible record
+Date:      not given; entries 1801-1825
+Place:     not given
+Original:  not stated; the book has a photocopy of one page.
+Form:      Photocopy, handwritten, all in one hand.
+In book:   PDF 4
+People:    Abel Harlan  (harlan-abel-1801)  born March 14[?] 1801
+           Ruth Pell  (pell-ruth-1805)  born Aug 9 1805
+           Ezra Harlan  (harlan-ezra-1825)  born May 2 1825
+Used on:   families/harlan-abel-1801.txt
+Shows:     Ruth's birth date, which the narrative does not give. Abel's
+           day differs from Ada's (4 Mar, PDF 2); the "14" is an
+           uncertain reading.
+----------------------------------------------------------------
+TEXT AS IN THE BOOK
+  [PDF 4, book page 3]
+    [handwritten: Births]
+    [handwritten: Abel Harlan was born March 14[?] 1801]
+    [handwritten: Ruth Pell was born Aug 9 1805]
+    [handwritten: Ezra Harlan born May 2 1825]

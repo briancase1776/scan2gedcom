@@ -1,0 +1,109 @@
+FAMILY GROUP SHEETS AND RECORDS
+How the readable layer is laid out. examples/demo has a finished
+sheet and two records.
+
+IDS
+  person   <surname>-<given>-<birth year>, lower case, a-z 0-9 and
+           hyphens: harlan-abel-1801. Women by maiden surname.
+           "x" for anything unknown: pell-ruth-x, cave-x-x,
+           harlan-unnamed-x. Add -2, -3 only if two ids would clash.
+  family   fam-<husband id>-<wife id>, "x" for an unknown partner:
+           fam-harlan-abel-1801-pell-ruth-1805, fam-x-harlan-lydia-1827.
+  record   rec-YYYY-MM-DD-<short description>; rec-YYYY-... if only the
+           year is known; rec-<short description> if undated:
+           rec-1830-03-02-deed-abel-ruth-harlan-to-ezra,
+           rec-harlan-family-bible.
+  An id never changes once another sheet links to it.
+
+TAGS
+  Every fact line ends with its source tag and PDF pages:
+  [F]  the author says it
+  [R]  a record the author copied or abstracted
+  [Q]  someone the author quotes (an obituary, a letter, a relative)
+  [I]  worked out on the sheet, not stated in the book: say how
+  A line can carry more than one: [F] PDF 2  [R] PDF 4
+
+FAMILY GROUP SHEET
+  One per principal (a person and their marriages), named by the
+  principal's id. Sections, each between two lines of 64 "=":
+
+  Title block
+    FAMILY GROUP SHEET   (with "TRIAL - draft 1" while being reviewed)
+    <principal> and <spouse(s)>
+    Id: <principal id>
+    Built from: <book>, cited by PDF page
+    Tags: the four tags above
+    Parents: families/<parents' sheet id>.txt, or "not known"
+    Living: no / yes / check, with the reason
+
+  <PRINCIPAL'S NAME>
+    Also, Born, Died, Buried, Places (dated residences), Work,
+    Religion, Land, Will, Notes ... as the book supports. A label
+    column 10 characters wide, the fact, then tag and pages.
+
+  <SPOUSE'S NAME>, one section per spouse
+    The spouse's own facts and parents, if the book gives them.
+
+  MARRIAGE, one per spouse: Date, Place, and then
+  CHILDREN OF <A> AND <B>: for each child, the name and id, born,
+    died, married, Living (with the reason), pages. Keep these short:
+    each child gets their own sheet.
+
+  RECORDS
+    Each record file used, with a one-line description and pages.
+
+  WHERE THE BOOK DISAGREES WITH ITSELF
+    Every conflict between pages: both readings, each with its pages.
+    Don't pick one.
+
+  OPEN QUESTIONS
+    The author's own unanswered questions, and gaps you notice.
+
+  THE AUTHOR'S ACCOUNT
+    The author's own words about this family, pulled verbatim with
+    @@QUOTE and @@PAGE lines (below). Keep a sheet readable: under
+    about 600 rendered lines.
+
+  Links both ways: a sheet names its parents' sheet; the parents'
+  sheet names each child's sheet once it exists.
+
+RECORD FILES
+  One per record the book copies or abstracts (deed, will, estate
+  paper, marriage record, bond, census entry, land claim, obituary,
+  family Bible page). Records about people deeper than the sheets go:
+  cite the pages on the sheet, no file.
+
+    RECORD                                    (TRIAL - draft 1)
+    <one or more title lines>
+    Id:        <record id>
+    Type:      deed / will / obituary / census / ...
+    Date:      as the record gives it
+    Place:
+    Original:  where the original is, as the book cites it
+    Form:      the author's abstract / a photocopy / a typed copy ...
+    In book:   PDF 3
+    People:    each person named, with id and role
+    Used on:   families/<sheet id>.txt, ...
+    Shows:     what the record proves, with [I] for your reasoning
+    ----------------------------------------------------------------
+    TEXT AS IN THE BOOK
+    @@QUOTE ...
+
+  The GEDCOM builder takes the record's title from the lines after
+  "RECORD" up to "Id:", and its citation from "In book:". Keep both.
+
+TEMPLATES AND RENDERING
+  Write templates in tools/templates/families/ and
+  tools/templates/records/. tools/render.py copies them to families/
+  and records/, replacing:
+
+    @@QUOTE p012 | start of first line | start of last line
+        the lines of page 12 from the one line that starts with the
+        first string, through the next line starting with the second.
+        The first string must match exactly one line on the page.
+        Neither string may contain "|".
+    @@PAGE p012
+        the whole body of page 12.
+
+  Each quote is labeled with its PDF page and the book's page number.
+  The rendered files are never edited by hand.

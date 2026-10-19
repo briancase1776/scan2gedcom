@@ -1,0 +1,14 @@
+{
+  "name": "scan2gedcom",
+  "owner": { "name": "briancase1776" },
+  "metadata": {
+    "description": "Genealogy tools: scanned family-history book to transcription, group sheets and GEDCOM."
+  },
+  "plugins": [
+    {
+      "name": "scan2gedcom",
+      "source": "./",
+      "description": "Turn a scanned family-history book into a page-by-page transcription, cited family group sheets, record files, structured data and a GEDCOM file."
+    }
+  ]
+}
