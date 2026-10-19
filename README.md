@@ -11,9 +11,13 @@ family tree you can trust, one checked stage at a time:
    quoted, or worked out) and the PDF page; one file per record the book
    copies; the book's own words pulled in verbatim by a script.
 3. **Structured data:** one JSON file per sheet, checked by a script.
-4. **GEDCOM 5.5.1:** one file for Ancestry, DNATools or any tree
-   program, with page citations on every event and conflicting readings
-   kept side by side.
+4. **Lineage files:** each line taken on down through the author's
+   numbered descendant lists to the living, as a text page and a data
+   file, so the tree can be used for DNA matching.
+5. **GEDCOM 5.5.1:** one file for Ancestry, DNATools or any tree
+   program, with page citations on every event, conflicting readings
+   kept side by side, adoptions and worked-out placements marked on
+   the family links, and the living flagged private.
 
 The book is the only source. Nothing is corrected silently, guesses
 never become facts, and living people stay private.
@@ -34,13 +38,14 @@ Python 3. `check_gedcom.py` needs `ged4py` (`pip install ged4py`).
 ## What's here
 
     skills/scan2gedcom/SKILL.md        the method, stage by stage
-    skills/scan2gedcom/reference/      transcription rules, sheet and
-                                       record layout, data format,
+    skills/scan2gedcom/reference/      transcription rules, sheet,
+                                       record and lineage file layout,
+                                       data format and living rule,
                                        briefs for helper agents
     skills/scan2gedcom/tools/          render.py, check_links.py,
                                        check_data.py, build_gedcom.py,
                                        check_gedcom.py
-    examples/demo/                     an invented four-page book taken
+    examples/demo/                     an invented six-page book taken
                                        through every stage
 
 To see the tools work, from `examples/demo`:

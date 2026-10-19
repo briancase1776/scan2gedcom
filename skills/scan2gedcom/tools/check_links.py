@@ -3,6 +3,8 @@
 #   - every families/<id>.txt and records/<id>.txt a file names exists
 #   - each file's "Id:" line matches its file name
 #   - each sheet's parents' sheet names it back
+#   - each lineage file (families/line-<sheet id>.txt) names its root
+#     sheet on a "Root sheet:" line, and the root sheet names it back
 #   - no rendered file is older than its template (render again)
 #   - no @@QUOTE / @@PAGE line is left unrendered
 import pathlib, re, sys
@@ -30,6 +32,12 @@ for p, s in text.items():
         parent = pathlib.Path("families", m.group(1) + ".txt")
         if parent in text and f"families/{p.stem}.txt" not in text[parent]:
             errors.append(f"{parent}: does not link to its child's sheet families/{p.stem}.txt")
+    if p.stem.startswith("line-"):
+        m = re.search(r"^Root sheet:\s*families/([a-z0-9-]+)\.txt", s, re.M)
+        root = pathlib.Path("families", p.stem[5:] + ".txt")
+        if not m or m.group(1) != p.stem[5:]: errors.append(f"{p}: needs a line \"Root sheet: {root}\"")
+        elif root in text and f"families/{p.stem}.txt" not in text[root]:
+            errors.append(f"{root}: does not link to its lineage file families/{p.stem}.txt")
 
 for e in errors: print(e)
 print(f"{len(files)} files, {len(errors)} problems")

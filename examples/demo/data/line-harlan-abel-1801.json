@@ -1,0 +1,176 @@
+{
+  "sheet": "line-harlan-abel-1801",
+  "people": [
+    {
+      "id": "quill-martha-x", "given": "Martha", "surname": "Quill", "sex": "F", "living": "no",
+      "facts": [
+        {"type": "DEAT", "date": "1856", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "dunn-sarah-1834", "given": "Sarah", "surname": "Dunn", "sex": "F", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "1834", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "dunn-jacob-x", "given": "Jacob", "surname": "Dunn", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "RESI", "place": "Linden Co.", "kind": "F", "cite": ["PDF 5"], "note": "\"Jacob and Hannah Dunn of Linden Co.\""}
+      ]
+    },
+    {
+      "id": "x-hannah-x", "given": "Hannah", "surname": "", "aka": ["Hannah Dunn"], "sex": "F", "living": "no",
+      "facts": [
+        {"type": "RESI", "place": "Linden Co.", "kind": "F", "cite": ["PDF 5"], "note": "\"Jacob and Hannah Dunn of Linden Co.\""}
+      ]
+    },
+    {
+      "id": "pike-amos-x", "given": "Amos", "surname": "Pike", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "DEAT", "kind": "F", "cite": ["PDF 5"], "note": "Sarah was his \"widow\" when she married Ezra in 1858"}
+      ]
+    },
+    {
+      "id": "pike-silas-1855", "given": "Silas", "surname": "Pike", "sex": "M", "living": "no",
+      "note": "Sarah Dunn's son by Amos Pike; \"raised by Ezra\" Harlan, his stepfather (PDF 5).",
+      "facts": [
+        {"type": "BIRT", "date": "1855", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "harlan-josiah-1850", "given": "Josiah", "surname": "Harlan", "sex": "M", "living": "no",
+      "note": "Son of Ezra by Ada's numbering (PDF 5). His mother is worked out [I]: born 1850, after Ezra married Martha Quill (1848) and before she died (1856); Ada does not say which wife was his mother.",
+      "facts": [
+        {"type": "BIRT", "date": "1850", "kind": "F", "cite": ["PDF 5"]},
+        {"type": "DEAT", "date": "1921", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "rusk-emma-x", "given": "Emma", "surname": "Rusk", "sex": "F", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "(17 Sep)", "kind": "F", "cite": ["PDF 5"], "note": "\"b. Sept. 17\"; no year"}
+      ]
+    },
+    {
+      "id": "harlan-walter-1878", "given": "Walter", "surname": "Harlan", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "12 JAN 1878", "kind": "F", "cite": ["PDF 5"]},
+        {"type": "DEAT", "date": "1950", "kind": "F", "cite": ["PDF 5"]},
+        {"type": "DEAT", "date": "INT 1950 (clipping dated Mar. 1950 by hand)", "kind": "Q", "cite": ["PDF 6"], "record": "rec-1950-obituary-walter-harlan", "note": "\"Walter Harlan, 72, died Sunday at his home on Pell Creek.\""},
+        {"type": "BURI", "place": "Pell Creek burying ground", "kind": "Q", "cite": ["PDF 6"], "record": "rec-1950-obituary-walter-harlan"},
+        {"type": "RESI", "place": "Pell Creek", "kind": "Q", "cite": ["PDF 6"], "record": "rec-1950-obituary-walter-harlan", "note": "At his death: \"his home on Pell Creek\""},
+        {"type": "OCCU", "value": "Farmer", "kind": "Q", "cite": ["PDF 6"], "record": "rec-1950-obituary-walter-harlan", "note": "\"He farmed there all his life.\""}
+      ]
+    },
+    {
+      "id": "venn-ida-x", "given": "Ida", "surname": "Venn", "sex": "F", "living": "no",
+      "facts": []
+    },
+    {
+      "id": "harlan-howard-1912", "given": "Howard", "surname": "Harlan", "sex": "M", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "1912", "kind": "F", "cite": ["PDF 5"]},
+        {"type": "RESI", "place": "Fenwick", "kind": "Q", "cite": ["PDF 6"], "record": "rec-1950-obituary-walter-harlan", "note": "In his father's obituary, 1950: \"a son, Howard, of Fenwick\""}
+      ]
+    },
+    {
+      "id": "lomax-grace-1918", "given": "Grace", "surname": "Lomax", "sex": "F", "living": "check",
+      "facts": [
+        {"type": "BIRT", "date": "1918", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "harlan-carol-1941", "given": "Carol", "surname": "Harlan", "sex": "F", "living": "check",
+      "facts": [
+        {"type": "BIRT", "date": "1941", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "harlan-daniel-1946", "given": "Daniel", "surname": "Harlan", "sex": "M", "living": "check",
+      "facts": [
+        {"type": "BIRT", "date": "1946", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "harlan-clara-1860", "given": "Clara", "surname": "Harlan", "sex": "F", "living": "no",
+      "facts": [
+        {"type": "BIRT", "date": "1860", "kind": "F", "cite": ["PDF 5"]},
+        {"type": "DEAT", "date": "1862", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "stewart-x-x", "given": "", "surname": "Stewart", "sex": "M", "living": "no",
+      "note": "Lydia Harlan's husband. His given name is a blank in the book: \"m. ___ Stewart\" (PDF 2, PDF 5).",
+      "facts": []
+    }
+  ],
+  "families": [
+    {
+      "id": "fam-harlan-ezra-1825-quill-martha-x",
+      "husband": "harlan-ezra-1825", "wife": "quill-martha-x",
+      "children": ["harlan-josiah-1850"],
+      "inferred": ["harlan-josiah-1850"],
+      "facts": [
+        {"type": "MARR", "date": "1848", "kind": "F", "cite": ["PDF 5"], "note": "Ezra's first marriage"}
+      ]
+    },
+    {
+      "id": "fam-harlan-ezra-1825-dunn-sarah-1834",
+      "husband": "harlan-ezra-1825", "wife": "dunn-sarah-1834",
+      "children": ["pike-silas-1855", "harlan-clara-1860"],
+      "step": {"pike-silas-1855": "husband"},
+      "facts": [
+        {"type": "MARR", "date": "1858", "kind": "F", "cite": ["PDF 5"], "note": "Ezra's second marriage"}
+      ]
+    },
+    {
+      "id": "fam-pike-amos-x-dunn-sarah-1834",
+      "husband": "pike-amos-x", "wife": "dunn-sarah-1834",
+      "children": ["pike-silas-1855"],
+      "facts": [
+        {"type": "MARR", "kind": "F", "cite": ["PDF 5"], "note": "Sarah was the \"widow of Amos Pike\"; no date"}
+      ]
+    },
+    {
+      "id": "fam-dunn-jacob-x-x-hannah-x",
+      "husband": "dunn-jacob-x", "wife": "x-hannah-x",
+      "children": ["dunn-sarah-1834"],
+      "facts": []
+    },
+    {
+      "id": "fam-harlan-josiah-1850-rusk-emma-x",
+      "husband": "harlan-josiah-1850", "wife": "rusk-emma-x",
+      "children": ["harlan-walter-1878"],
+      "facts": [
+        {"type": "MARR", "date": "1874", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "fam-harlan-walter-1878-venn-ida-x",
+      "husband": "harlan-walter-1878", "wife": "venn-ida-x",
+      "children": ["harlan-howard-1912"],
+      "facts": [
+        {"type": "MARR", "date": "1905", "kind": "F", "cite": ["PDF 5"]},
+        {"type": "MARR", "date": "1906", "kind": "Q", "cite": ["PDF 6"], "record": "rec-1950-obituary-walter-harlan", "note": "\"He and the former Ida Venn were married in 1906.\""}
+      ]
+    },
+    {
+      "id": "fam-harlan-howard-1912-lomax-grace-1918",
+      "husband": "harlan-howard-1912", "wife": "lomax-grace-1918",
+      "children": ["harlan-carol-1941", "harlan-daniel-1946"],
+      "adopted": ["harlan-daniel-1946"],
+      "facts": [
+        {"type": "MARR", "date": "1938", "kind": "F", "cite": ["PDF 5"]}
+      ]
+    },
+    {
+      "id": "fam-stewart-x-x-harlan-lydia-1827",
+      "husband": "stewart-x-x", "wife": "harlan-lydia-1827",
+      "children": [],
+      "facts": [
+        {"type": "MARR", "kind": "F", "cite": ["PDF 2", "PDF 5"], "note": "\"m. ___ Stewart\"; no date"}
+      ]
+    }
+  ]
+}

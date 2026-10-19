@@ -1,0 +1,28 @@
+RECORD                                                 TRIAL  -  draft 1
+Obituary of Walter Harlan, 1950
+Id:        rec-1950-obituary-walter-harlan
+Type:      obituary
+Date:      not printed; "Mar. 1950" added by hand
+Place:     not given; he died at his home on Pell Creek
+Original:  the newspaper is not named.
+Form:      Clipping, with a handwritten date.
+In book:   PDF 6
+People:    Walter Harlan  (harlan-walter-1878)  the deceased, "72"
+           Ida Venn  (venn-ida-x)  his wife, "the former Ida Venn"
+           Howard Harlan  (harlan-howard-1912)  his son, "of Fenwick"
+Used on:   families/line-harlan-abel-1801.txt
+Shows:     Walter's death, home, work and burial. Gives his marriage as
+           1906; Ada's entry has 1905 (PDF 5). Born 12 Jan 1878 (PDF
+           5), he would be 72 in Mar. 1950 [I], as the clipping says.
+           The "two grandchildren" fit Carol and Daniel (PDF 5) [I].
+----------------------------------------------------------------
+TEXT AS IN THE BOOK
+  [PDF 6, book page 5]
+    WALTER HARLAN
+
+    Walter Harlan, 72, died Sunday at his home on Pell Creek. He
+    farmed there all his life. He and the former Ida Venn were
+    married in 1906. Survivors are his wife; a son, Howard, of
+    Fenwick; and two grandchildren. Burial was in the Pell Creek
+    burying ground.
+    [handwritten: Mar. 1950]

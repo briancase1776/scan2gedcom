@@ -6,17 +6,47 @@
 2 FORM LINEAGE-LINKED
 1 CHAR UTF-8
 1 SUBM @U1@
-1 NOTE Built from the family group sheets drawn from "The Harlan Family of Pell Creek" by Ada Harlan Moss. Each person's REFN is the id used on the sheets. Where the book disagrees with itself, each reading
-2 CONC is a separate event with its own page citation.
+1 NOTE Built from the family group sheets and lineage files drawn from "The Harlan Family of Pell Creek" by Ada Harlan Moss. Each person's REFN is the id used on the sheets. Where the book disagrees with its
+2 CONC elf, each reading is a separate event with its own page citation. People marked RESN privacy may be living.
 0 @U1@ SUBM
 1 NAME Harlan Family transcription project
 0 @I1@ INDI
+1 NAME Jacob /Dunn/
+2 GIVN Jacob
+2 SURN Dunn
+1 SEX M
+1 REFN dunn-jacob-x
+2 TYPE harlan-family-sheets
+1 RESI
+2 PLAC Linden Co.
+2 NOTE "Jacob and Hannah Dunn of Linden Co."
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMS @F1@
+0 @I2@ INDI
+1 NAME Sarah /Dunn/
+2 GIVN Sarah
+2 SURN Dunn
+1 SEX F
+1 REFN dunn-sarah-1834
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 1834
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMC @F1@
+1 FAMS @F3@
+1 FAMS @F8@
+0 @I3@ INDI
 1 NAME Abel /Harlan/
 2 GIVN Abel
 2 SURN Harlan
 1 SEX M
 1 REFN harlan-abel-1801
 2 TYPE harlan-family-sheets
+1 NOTE His father is "not known for certain"; family tradition makes him a son of Thomas Harlan (PDF 2). Not linked as a parent: a guess.
 1 BIRT
 2 DATE 4 MAR 1801
 2 PLAC Linden Co.
@@ -29,7 +59,7 @@
 2 SOUR @S1@
 3 PAGE PDF 4
 3 NOTE [R] a record Ada copied or abstracted
-2 SOUR @S3@
+2 SOUR @S4@
 3 PAGE PDF 4
 1 DEAT
 2 DATE 9 OCT 1869
@@ -57,8 +87,55 @@
 3 NOTE [R] a record Ada copied or abstracted
 2 SOUR @S2@
 3 PAGE PDF 3
-1 FAMS @F1@
-0 @I2@ INDI
+1 FAMS @F2@
+0 @I4@ INDI
+1 NAME Carol /Harlan/
+2 GIVN Carol
+2 SURN Harlan
+1 SEX F
+1 RESN privacy
+1 REFN harlan-carol-1941
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 1941
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMC @F5@
+0 @I5@ INDI
+1 NAME Clara /Harlan/
+2 GIVN Clara
+2 SURN Harlan
+1 SEX F
+1 REFN harlan-clara-1860
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 1860
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 DEAT
+2 DATE 1862
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMC @F3@
+0 @I6@ INDI
+1 NAME Daniel /Harlan/
+2 GIVN Daniel
+2 SURN Harlan
+1 SEX M
+1 RESN privacy
+1 REFN harlan-daniel-1946
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 1946
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMC @F5@
+2 PEDI adopted
+0 @I7@ INDI
 1 NAME Ezra /Harlan/
 2 GIVN Ezra
 2 SURN Harlan
@@ -76,10 +153,55 @@
 2 SOUR @S1@
 3 PAGE PDF 4
 3 NOTE [R] a record Ada copied or abstracted
-2 SOUR @S3@
+2 SOUR @S4@
 3 PAGE PDF 4
-1 FAMC @F1@
-0 @I3@ INDI
+1 FAMC @F2@
+1 FAMS @F3@
+1 FAMS @F4@
+0 @I8@ INDI
+1 NAME Howard /Harlan/
+2 GIVN Howard
+2 SURN Harlan
+1 SEX M
+1 REFN harlan-howard-1912
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 1912
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 RESI
+2 PLAC Fenwick
+2 NOTE In his father's obituary, 1950: "a son, Howard, of Fenwick"
+2 SOUR @S1@
+3 PAGE PDF 6
+3 NOTE [Q] someone Ada quotes
+2 SOUR @S3@
+3 PAGE PDF 6
+1 FAMC @F7@
+1 FAMS @F5@
+0 @I9@ INDI
+1 NAME Josiah /Harlan/
+2 GIVN Josiah
+2 SURN Harlan
+1 SEX M
+1 REFN harlan-josiah-1850
+2 TYPE harlan-family-sheets
+1 NOTE Son of Ezra by Ada's numbering (PDF 5). His mother is worked out [I]: born 1850, after Ezra married Martha Quill (1848) and before she died (1856); Ada does not say which wife was his mother.
+1 BIRT
+2 DATE 1850
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 DEAT
+2 DATE 1921
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMC @F4@
+2 NOTE Placement in this family partly or wholly worked out [I] (one or both parents); see the sheet
+1 FAMS @F6@
+0 @I10@ INDI
 1 NAME Lydia /Harlan/
 2 GIVN Lydia
 2 SURN Harlan
@@ -92,8 +214,9 @@
 2 SOUR @S1@
 3 PAGE PDF 2
 3 NOTE [F] Ada says it
-1 FAMC @F1@
-0 @I4@ INDI
+1 FAMC @F2@
+1 FAMS @F9@
+0 @I11@ INDI
 1 NAME Thomas /Harlan/
 2 GIVN Thomas
 2 SURN Harlan
@@ -110,8 +233,71 @@
 2 SOUR @S1@
 3 PAGE PDF 2
 3 NOTE [F] Ada says it
-1 FAMC @F1@
-0 @I5@ INDI
+1 FAMC @F2@
+0 @I12@ INDI
+1 NAME Walter /Harlan/
+2 GIVN Walter
+2 SURN Harlan
+1 SEX M
+1 REFN harlan-walter-1878
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 12 JAN 1878
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 DEAT
+2 DATE 1950
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 DEAT
+2 DATE INT 1950 (clipping dated Mar. 1950 by hand)
+2 NOTE "Walter Harlan, 72, died Sunday at his home on Pell Creek."
+2 SOUR @S1@
+3 PAGE PDF 6
+3 NOTE [Q] someone Ada quotes
+2 SOUR @S3@
+3 PAGE PDF 6
+1 BURI
+2 PLAC Pell Creek burying ground
+2 SOUR @S1@
+3 PAGE PDF 6
+3 NOTE [Q] someone Ada quotes
+2 SOUR @S3@
+3 PAGE PDF 6
+1 RESI
+2 PLAC Pell Creek
+2 NOTE At his death: "his home on Pell Creek"
+2 SOUR @S1@
+3 PAGE PDF 6
+3 NOTE [Q] someone Ada quotes
+2 SOUR @S3@
+3 PAGE PDF 6
+1 OCCU Farmer
+2 NOTE "He farmed there all his life."
+2 SOUR @S1@
+3 PAGE PDF 6
+3 NOTE [Q] someone Ada quotes
+2 SOUR @S3@
+3 PAGE PDF 6
+1 FAMC @F6@
+1 FAMS @F7@
+0 @I13@ INDI
+1 NAME Grace /Lomax/
+2 GIVN Grace
+2 SURN Lomax
+1 SEX F
+1 RESN privacy
+1 REFN lomax-grace-1918
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE 1918
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMS @F5@
+0 @I14@ INDI
 1 NAME Ruth /Pell/
 2 GIVN Ruth
 2 SURN Pell
@@ -124,7 +310,7 @@
 2 SOUR @S1@
 3 PAGE PDF 4
 3 NOTE [R] a record Ada copied or abstracted
-2 SOUR @S3@
+2 SOUR @S4@
 3 PAGE PDF 4
 1 DEAT
 2 DATE 1 FEB 1871
@@ -154,13 +340,105 @@
 3 NOTE [R] a record Ada copied or abstracted
 2 SOUR @S2@
 3 PAGE PDF 3
+1 FAMS @F2@
+0 @I15@ INDI
+1 NAME Amos /Pike/
+2 GIVN Amos
+2 SURN Pike
+1 SEX M
+1 REFN pike-amos-x
+2 TYPE harlan-family-sheets
+1 DEAT
+2 NOTE Sarah was his "widow" when she married Ezra in 1858
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMS @F8@
+0 @I16@ INDI
+1 NAME Silas /Pike/
+2 GIVN Silas
+2 SURN Pike
+1 SEX M
+1 REFN pike-silas-1855
+2 TYPE harlan-family-sheets
+1 NOTE Sarah Dunn's son by Amos Pike; "raised by Ezra" Harlan, his stepfather (PDF 5).
+1 BIRT
+2 DATE 1855
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMC @F3@
+2 NOTE Step-child of the husband in this family; the child of the other parent
+1 FAMC @F8@
+0 @I17@ INDI
+1 NAME Martha /Quill/
+2 GIVN Martha
+2 SURN Quill
+1 SEX F
+1 REFN quill-martha-x
+2 TYPE harlan-family-sheets
+1 DEAT
+2 DATE 1856
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMS @F4@
+0 @I18@ INDI
+1 NAME Emma /Rusk/
+2 GIVN Emma
+2 SURN Rusk
+1 SEX F
+1 REFN rusk-emma-x
+2 TYPE harlan-family-sheets
+1 BIRT
+2 DATE (17 Sep)
+2 NOTE "b. Sept. 17"; no year
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 FAMS @F6@
+0 @I19@ INDI
+1 NAME /Stewart/
+2 SURN Stewart
+1 SEX M
+1 REFN stewart-x-x
+2 TYPE harlan-family-sheets
+1 NOTE Lydia Harlan's husband. His given name is a blank in the book: "m. ___ Stewart" (PDF 2, PDF 5).
+1 FAMS @F9@
+0 @I20@ INDI
+1 NAME Ida /Venn/
+2 GIVN Ida
+2 SURN Venn
+1 SEX F
+1 REFN venn-ida-x
+2 TYPE harlan-family-sheets
+1 FAMS @F7@
+0 @I21@ INDI
+1 NAME Hannah //
+2 GIVN Hannah
+1 NAME Hannah Dunn
+2 TYPE aka
+1 SEX F
+1 REFN x-hannah-x
+2 TYPE harlan-family-sheets
+1 RESI
+2 PLAC Linden Co.
+2 NOTE "Jacob and Hannah Dunn of Linden Co."
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
 1 FAMS @F1@
 0 @F1@ FAM
 1 HUSB @I1@
-1 WIFE @I5@
+1 WIFE @I21@
 1 CHIL @I2@
-1 CHIL @I3@
-1 CHIL @I4@
+1 REFN fam-dunn-jacob-x-x-hannah-x
+0 @F2@ FAM
+1 HUSB @I3@
+1 WIFE @I14@
+1 CHIL @I7@
+1 CHIL @I10@
+1 CHIL @I11@
 1 MARR
 2 DATE 12 JUN 1824
 2 PLAC her father's house on Pell Creek
@@ -168,14 +446,102 @@
 3 PAGE PDF 2
 3 NOTE [F] Ada says it
 1 REFN fam-harlan-abel-1801-pell-ruth-1805
+0 @F3@ FAM
+1 HUSB @I7@
+1 WIFE @I2@
+1 CHIL @I16@
+2 _FREL Step
+2 _MREL Natural
+1 CHIL @I5@
+1 MARR
+2 DATE 1858
+2 NOTE Ezra's second marriage
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 REFN fam-harlan-ezra-1825-dunn-sarah-1834
+0 @F4@ FAM
+1 HUSB @I7@
+1 WIFE @I17@
+1 CHIL @I9@
+1 MARR
+2 DATE 1848
+2 NOTE Ezra's first marriage
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 REFN fam-harlan-ezra-1825-quill-martha-x
+0 @F5@ FAM
+1 HUSB @I8@
+1 WIFE @I13@
+1 CHIL @I4@
+1 CHIL @I6@
+2 _FREL Adopted
+2 _MREL Adopted
+1 MARR
+2 DATE 1938
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 REFN fam-harlan-howard-1912-lomax-grace-1918
+0 @F6@ FAM
+1 HUSB @I9@
+1 WIFE @I18@
+1 CHIL @I12@
+1 MARR
+2 DATE 1874
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 REFN fam-harlan-josiah-1850-rusk-emma-x
+0 @F7@ FAM
+1 HUSB @I12@
+1 WIFE @I20@
+1 CHIL @I8@
+1 MARR
+2 DATE 1905
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 MARR
+2 DATE 1906
+2 NOTE "He and the former Ida Venn were married in 1906."
+2 SOUR @S1@
+3 PAGE PDF 6
+3 NOTE [Q] someone Ada quotes
+2 SOUR @S3@
+3 PAGE PDF 6
+1 REFN fam-harlan-walter-1878-venn-ida-x
+0 @F8@ FAM
+1 HUSB @I15@
+1 WIFE @I2@
+1 CHIL @I16@
+1 MARR
+2 NOTE Sarah was the "widow of Amos Pike"; no date
+2 SOUR @S1@
+3 PAGE PDF 5
+3 NOTE [F] Ada says it
+1 REFN fam-pike-amos-x-dunn-sarah-1834
+0 @F9@ FAM
+1 HUSB @I19@
+1 WIFE @I10@
+1 MARR
+2 NOTE "m. ___ Stewart"; no date
+2 SOUR @S1@
+3 PAGE PDF 2, PDF 5
+3 NOTE [F] Ada says it
+1 REFN fam-stewart-x-x-harlan-lydia-1827
 0 @S1@ SOUR
 1 TITL The Harlan Family of Pell Creek
 1 AUTH Ada Harlan Moss
-1 NOTE Invented example book (4 PDF pages). Pages are cited by PDF page of the scan, as in the transcription.
+1 NOTE Invented example book (6 PDF pages). Pages are cited by PDF page of the scan, as in the transcription.
 0 @S2@ SOUR
 1 TITL Deed, Abel and Ruth Harlan to Ezra Harlan, 80 acres on Pell Creek, 1830
 1 NOTE Known only from Ada's copy or abstract in the book (PDF 3). Record file: records/rec-1830-03-02-deed-abel-ruth-harlan-to-ezra.txt
 0 @S3@ SOUR
+1 TITL Obituary of Walter Harlan, 1950
+1 NOTE Known only from Ada's copy or abstract in the book (PDF 6). Record file: records/rec-1950-obituary-walter-harlan.txt
+0 @S4@ SOUR
 1 TITL Harlan family Bible, births
 1 NOTE Known only from Ada's copy or abstract in the book (PDF 4). Record file: records/rec-harlan-family-bible.txt
 0 TRLR

@@ -3,6 +3,7 @@
   "people": [
     {
       "id": "harlan-abel-1801", "given": "Abel", "surname": "Harlan", "sex": "M", "living": "no",
+      "note": "His father is \"not known for certain\"; family tradition makes him a son of Thomas Harlan (PDF 2). Not linked as a parent: a guess.",
       "facts": [
         {"type": "BIRT", "date": "4 MAR 1801", "place": "Linden Co.", "kind": "F", "cite": ["PDF 2"]},
         {"type": "BIRT", "date": "14 MAR 1801", "kind": "R", "cite": ["PDF 4"], "record": "rec-harlan-family-bible", "note": "Family Bible: \"March 14[?] 1801\"; uncertain reading"},

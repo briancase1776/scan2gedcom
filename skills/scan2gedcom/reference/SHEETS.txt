@@ -1,6 +1,6 @@
 FAMILY GROUP SHEETS AND RECORDS
 How the readable layer is laid out. examples/demo has a finished
-sheet and two records.
+sheet, a lineage file and three records.
 
 IDS
   person   <surname>-<given>-<birth year>, lower case, a-z 0-9 and
@@ -13,6 +13,7 @@ IDS
            year is known; rec-<short description> if undated:
            rec-1830-03-02-deed-abel-ruth-harlan-to-ezra,
            rec-harlan-family-bible.
+  lineage  line-<sheet id>: line-harlan-abel-1801.
   An id never changes once another sheet links to it.
 
 TAGS
@@ -34,7 +35,9 @@ FAMILY GROUP SHEET
     Built from: <book>, cited by PDF page
     Tags: the four tags above
     Parents: families/<parents' sheet id>.txt, or "not known"
-    Living: no / yes / check, with the reason
+    Lineage: families/line-<id>.txt, once there is one (below)
+    Living: no / yes / check, with the reason, by the LIVING rule in
+            DATA-FORMAT.txt ("no [I]: married 1874")
 
   <PRINCIPAL'S NAME>
     Also, Born, Died, Buried, Places (dated residences), Work,
@@ -42,19 +45,26 @@ FAMILY GROUP SHEET
     column 10 characters wide, the fact, then tag and pages.
 
   <SPOUSE'S NAME>, one section per spouse
-    The spouse's own facts and parents, if the book gives them.
+    The spouse's own facts and parents, if the book gives them, and
+    the spouse's children by another marriage (the principal's
+    step-children), with ids: everyone the book names as family gets
+    an id, living or not. A step-child stays the child of their own
+    parents, even if the principal adopted them; the data marks the
+    principal as step-parent ("step" in DATA-FORMAT.txt).
 
   MARRIAGE, one per spouse: Date, Place, and then
   CHILDREN OF <A> AND <B>: for each child, the name and id, born,
     died, married, Living (with the reason), pages. Keep these short:
-    each child gets their own sheet.
+    each child gets their own sheet, or their line goes on a lineage
+    file.
 
   RECORDS
     Each record file used, with a one-line description and pages.
 
   WHERE THE BOOK DISAGREES WITH ITSELF
     Every conflict between pages: both readings, each with its pages.
-    Don't pick one.
+    Don't pick one. That includes a family's name typed two ways:
+    names stay as typed for each person, never normalized.
 
   OPEN QUESTIONS
     The author's own unanswered questions, and gaps you notice.
@@ -70,8 +80,9 @@ FAMILY GROUP SHEET
 RECORD FILES
   One per record the book copies or abstracts (deed, will, estate
   paper, marriage record, bond, census entry, land claim, obituary,
-  family Bible page). Records about people deeper than the sheets go:
-  cite the pages on the sheet, no file.
+  notice, family Bible page). Nothing is left out to save time: a
+  record about someone below the sheets gets its file too, used on
+  the lineage file.
 
     RECORD                                    (TRIAL - draft 1)
     <one or more title lines>
@@ -92,10 +103,55 @@ RECORD FILES
   The GEDCOM builder takes the record's title from the lines after
   "RECORD" up to "Id:", and its citation from "In book:". Keep both.
 
+LINEAGE FILES
+  A sheet stops at the principal's children. A lineage file takes a
+  sheet's branch the rest of the way down, through the author's
+  numbered descendant entries to the last one, so the tree reaches the
+  living: DNA matches are made with living cousins. It hangs from a
+  sheet whose children have no sheets of their own, and is named for
+  it: families/line-<sheet id>.txt, with its data in
+  data/line-<sheet id>.json. The sheet's own people are not repeated.
+
+  Title block
+    LINEAGE FILE   (with "TRIAL - draft 1" while being reviewed)
+    <principal> and <spouse(s)>: descendants
+    Id: line-<sheet id>
+    Root sheet: families/<sheet id>.txt
+    Built from, Tags: as on the sheets
+    Pages: the PDF pages used
+    Living: how many are "no" and how many "check"
+
+  DESCENDANTS
+    Indented one step per generation, with the author's generation
+    number. The root sheet's children by name and id only; below each,
+    their marriages, then their descendants. Each person: a line with
+    the name and id, then b. / d. / bur. / m. (with the spouse's name
+    and id) and Living with the reason, each with tags and pages. A
+    spouse's parents, with ids, go under the spouse. Keep it compact;
+    spelling as typed, corrections tagged [I].
+
+  RECORDS, WHERE THE BOOK DISAGREES WITH ITSELF
+    As on the sheets.
+
+  NUMBERING AND PARENTAGE
+    How the author's numbers were read (an entry belongs to the
+    nearest entry above it with the next lower number); any number
+    that is missing, repeated or mistyped, and how it was read; every
+    child placed in a family partly or wholly by working out [I]
+    (which marriage, which parent), saying which parent and why;
+    step-children, with their own parents and the step-parent;
+    adoptions.
+
+  THE AUTHOR'S ENTRIES
+    Every page used, as @@PAGE / @@QUOTE lines.
+
+  The root sheet's title block names its lineage file ("Lineage:"),
+  and the lineage file's "Root sheet:" names the sheet.
+
 TEMPLATES AND RENDERING
-  Write templates in tools/templates/families/ and
-  tools/templates/records/. tools/render.py copies them to families/
-  and records/, replacing:
+  Write templates in tools/templates/families/ (sheets and lineage
+  files) and tools/templates/records/. tools/render.py copies them to
+  families/ and records/, replacing:
 
     @@QUOTE p012 | start of first line | start of last line
         the lines of page 12 from the one line that starts with the

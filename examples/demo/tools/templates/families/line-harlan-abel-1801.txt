@@ -1,0 +1,129 @@
+LINEAGE FILE                                           TRIAL  -  draft 1
+Abel Harlan and Ruth Pell: descendants
+Id: line-harlan-abel-1801
+Root sheet: families/harlan-abel-1801.txt
+Built from: "The Harlan Family of Pell Creek" by Ada Harlan Moss (an
+invented example book), cited by PDF page.
+Tags: [F] = Ada says it  [R] = a record she copied or abstracted
+      [Q] = someone she quotes  [I] = worked out here, not in the book
+Pages: PDF 2, PDF 5-6
+Living: 13 no, 3 check (Grace Lomax, Carol Harlan, Daniel Harlan).
+        Private tree only: not for publication.
+
+================================================================
+DESCENDANTS
+================================================================
+Ada's generation numbers, counted from Abel (1); one step of indent
+per generation. Abel's children are on the root sheet: here are their
+marriages and everyone below them.
+
+2  Ezra Harlan                                          harlan-ezra-1825
+   m. (1) 1848, Martha Quill (quill-martha-x)           [F] PDF 5
+          d. 1856                                       [F] PDF 5
+          Living   no: died 1856
+   m. (2) 1858, Sarah Dunn (dunn-sarah-1834)            [F] PDF 5
+          b. 1834                                       [F] PDF 5
+          Living   no [I]: born 1834
+          Parents  "Jacob and Hannah Dunn of Linden Co."  [F] PDF 5
+                   Jacob Dunn (dunn-jacob-x); Hannah, maiden name
+                   not given (x-hannah-x)
+                   Living   no [I]: their daughter was born 1834
+          Earlier  "widow of Amos Pike" (pike-amos-x)   [F] PDF 5
+                   Living   no: dead by 1858 [I]
+          Her son  Silas Pike, b. 1855 (pike-silas-1855), "raised by
+                   Ezra": Ezra's step-son, not his son  [F] PDF 5
+                   Living   no [I]: born 1855
+   3  Josiah Harlan, b. 1850, d. 1921                 harlan-josiah-1850
+                                                        [F] PDF 5
+      Mother   Martha [I]: Ada does not say. See NUMBERING AND
+               PARENTAGE.
+      Living   no: died 1921
+      m. 1874, Emma Rusk (rusk-emma-x)                  [F] PDF 5
+             b. "Sept. 17", no year                     [F] PDF 5
+             Living   no [I]: married 1874
+      4  Walter Harlan, b. 12 Jan 1878, d. 1950       harlan-walter-1878
+                                                        [F] PDF 5
+         d. "Sunday", "72"; the clipping is dated "Mar. 1950"
+            by hand                                     [Q] PDF 6
+         bur. Pell Creek burying ground                 [Q] PDF 6
+         Home     Pell Creek, at his death; "He farmed there all
+                  his life."                            [Q] PDF 6
+         Living   no: died 1950
+         m. 1905, Ida Venn (venn-ida-x)                 [F] PDF 5
+            "married in 1906"                           [Q] PDF 6
+            Ida survived him, 1950                      [Q] PDF 6
+            Living   no [I]: married 1905
+         5  Howard Harlan, b. 1912                    harlan-howard-1912
+                                                        [F] PDF 5
+            Home     Fenwick, 1950: "a son, Howard, of Fenwick"
+                                                        [Q] PDF 6
+            Living   no [I]: born 1912
+            m. 1938, Grace Lomax (lomax-grace-1918)     [F] PDF 5
+               b. 1918                                  [F] PDF 5
+               Living   check: born 1918
+            6  Carol Harlan, b. 1941                   harlan-carol-1941
+                                                        [F] PDF 5
+               Living   check: born 1941
+            6  Daniel Harlan, b. 1946, "adopted"      harlan-daniel-1946
+                                                        [F] PDF 5
+               Living   check: born 1946
+   3  Clara Harlan, b. 1860, d. 1862                   harlan-clara-1860
+                                                        [F] PDF 5
+      Mother   Sarah: "By Sarah he had Clara"           [F] PDF 5
+      Living   no: died 1862
+
+2  Lydia Harlan                                        harlan-lydia-1827
+   m. ___ Stewart (stewart-x-x); no date        [F] PDF 2  [F] PDF 5
+          Living   no [I]: his wife was born 1827
+   "Nothing more is known of her."                      [F] PDF 5
+
+================================================================
+RECORDS
+================================================================
+records/rec-1950-obituary-walter-harlan.txt
+     Obituary of Walter Harlan, 1950 (PDF 6)
+
+================================================================
+WHERE THE BOOK DISAGREES WITH ITSELF
+================================================================
+Walter and Ida's marriage   1905 (PDF 5)  |  "married in 1906"
+                            (obituary, PDF 6)
+
+================================================================
+NUMBERING AND PARENTAGE
+================================================================
+Ada numbers each generation from Abel (1). An entry belongs to the
+nearest entry above it with the next lower number: Josiah and Clara
+(3) to Ezra (2), Walter (4) to Josiah, Howard (5) to Walter, Carol
+and Daniel (6) to Howard. The numbers on PDF 5 run without a break.
+
+Josiah's mother [I]. Ada gives Ezra two wives and says "By Sarah he
+had Clara", but not who Josiah's mother was. Ezra is his father by
+the numbering; Martha is worked out: Josiah was born in 1850, after
+Ezra's first marriage (1848) and before Martha's death (1856) and his
+second marriage (1858). In the data he is "inferred" in the family of
+Ezra and Martha.
+
+Silas Pike has no number: he is Sarah's son by Amos Pike, not Abel's
+descendant, and was "raised by Ezra" (PDF 5). In the data he is a
+child of Amos and Sarah, and also in Ezra and Sarah's family under
+"step", with Ezra (the husband) as his step-parent; never Ezra's own
+child.
+
+Daniel: "b. 1946, adopted" (PDF 5), under Howard. Ada names no birth
+parents for him, and he is not a step-child: Howard and Grace adopted
+him. In the data he is "adopted" in their family. Carol's entry has
+no such word.
+
+================================================================
+ADA'S ENTRIES
+================================================================
+The descendants (PDF 5), the whole page:
+@@PAGE p005
+
+Lydia's marriage, from Abel's section (PDF 2):
+@@QUOTE p002 | 2. Lydia Harlan | 2. Lydia Harlan
+
+Walter's obituary (PDF 6), also in
+records/rec-1950-obituary-walter-harlan.txt:
+@@PAGE p006

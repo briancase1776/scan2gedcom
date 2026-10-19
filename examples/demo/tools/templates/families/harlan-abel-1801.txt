@@ -6,6 +6,8 @@ invented example book), cited by PDF page.
 Tags: [F] = Ada says it  [R] = a record she copied or abstracted
       [Q] = someone she quotes  [I] = worked out here, not in the book
 Parents: not known. Tradition makes Abel a son of Thomas Harlan (below).
+Lineage: families/line-harlan-abel-1801.txt (the children's marriages
+         and descendants)
 Living: no. Abel died in 1869, Ruth in 1871.
 
 ================================================================

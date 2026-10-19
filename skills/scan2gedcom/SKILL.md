@@ -1,11 +1,12 @@
 ---
 name: scan2gedcom
-description: Turn a scanned family-history book (a PDF of typed, handwritten or photocopied pages) into a page-by-page text transcription, family group sheets that quote the book with page citations, one file per record the book copies, structured JSON data, and a GEDCOM 5.5.1 file for a family-tree program (Ancestry, DNATools and others). Use when someone has a scanned genealogy book, family history or typescript and wants it transcribed, organized into group sheets, or exported as GEDCOM.
+description: Turn a scanned family-history book (a PDF of typed, handwritten or photocopied pages) into a page-by-page text transcription, family group sheets that quote the book with page citations, one file per record the book copies, lineage files that carry each line down to the living, structured JSON data, and a GEDCOM 5.5.1 file for a family-tree program (Ancestry, DNATools and others). Use when someone has a scanned genealogy book, family history or typescript and wants it transcribed, organized into group sheets, or exported as GEDCOM.
 ---
 
 # scan2gedcom
 
-Scanned book → transcription → group sheets + records → data → GEDCOM.
+Scanned book → transcription → group sheets + records → data →
+lineage files down to the living → GEDCOM.
 
 Each stage is checked against the page images before the next one
 starts, and nothing is ever stated without the PDF page it came from.
@@ -18,8 +19,10 @@ This skill's directory (shown when the skill loads) holds:
     tools/          render.py  check_data.py  check_links.py
                     build_gedcom.py  check_gedcom.py
     reference/      CONVENTIONS.txt   transcription rules
-                    SHEETS.txt        group sheet and record layout
-                    DATA-FORMAT.txt   JSON format for the GEDCOM build
+                    SHEETS.txt        group sheet, record and lineage
+                                      file layout
+                    DATA-FORMAT.txt   JSON format for the GEDCOM build,
+                                      and the LIVING rule
                     briefs/           briefs for helper agents
     ../../examples/demo/   a tiny invented book taken through every stage
 
@@ -58,7 +61,9 @@ invented family, and every tool runs on it.
    of records, photocopies, newspaper clippings, handwriting, photos,
    maps, charts.
 3. Talk the plan over with the user before starting. Ask what they
-   want from it and who in the book may be living.
+   want from it (a tree for DNA matching needs every line down to the
+   living) and who in the book may be living, and agree the years of
+   the LIVING rule (`reference/DATA-FORMAT.txt`).
 4. In the project repository:
 
        mkdir -p transcription tools/templates/families tools/templates/records data
@@ -67,7 +72,8 @@ invented family, and every tool runs on it.
        cp <skill-dir>/reference/DATA-FORMAT.txt tools/
 
    and write `scan2gedcom.json` at the root (see
-   `examples/demo/scan2gedcom.json`). The project keeps its own copy of
+   `examples/demo/scan2gedcom.json`; `living_rule` holds the agreed
+   years). The project keeps its own copy of
    the tools, so later changes to the skill don't change old results.
 5. Edit `transcription/CONVENTIONS.txt` for this book (title, author,
    page count, any marks the book needs). Every change to the rules
@@ -134,16 +140,25 @@ Order of work:
 2. **Their children,** one sheet each, by helper agents
    (`reference/briefs/sheets.txt`), the trial sheet as the model.
 3. **Then one line at a time** (one child's children, and so on), each
-   set no bigger than the last.
+   set no bigger than the last, as deep as the user wants full sheets.
+   Below that, a line goes on a lineage file (Stage 4).
 
 Each sheet links to its parents' sheet and the parents' sheet links to
 each child's. Records are shared, so agents running at the same time
 make duplicates: after each round, look for records with the same date
-and people, keep one, fix the links, render again.
+and people, keep one, fix the links, render again. Every record the
+book copies or abstracts gets its file; nothing is left out to save
+time.
 
-**Living people.** Anyone born after about 1925 without a death date is
-"check". Agree with the user how deep the sheets go; leaving the
-younger generations off the sheets is the simplest protection.
+**Living people.** Everyone the book names as family goes in, living
+or not: one set of sheets, data and GEDCOM, with the living flagged.
+Living is "no" if the person died, or was born 1915 or earlier, or
+(with no birth year) married before 1940, had a child born before 1940
+or had a spouse born before 1900 [I]; "check" otherwise; so nobody
+born in the 1800s is marked living. Every Living line gives its reason
+("no [I]: married 1874"). The years are the user's choice, set in
+`scan2gedcom.json`; the rule is under LIVING in
+`reference/DATA-FORMAT.txt`.
 
 ## Stage 3: structured data
 
@@ -166,22 +181,71 @@ Rules that matter most:
   link, a fuller quote), change it in both files.
 - Sex from the book; otherwise from a clearly male or female given
   name; `U` only if neither.
+- Everyone the sheet names as family is a person: a spouse's parents
+  (in their own family), a step-child (in their own parents' family,
+  and also in the step-family under `step`, which names the
+  step-parent; never a plain child of a step-parent, even one who
+  adopted them: that adoption is an `EVEN` fact on the child, any new
+  name an `aka`). A child adopted by people neither of whom is their
+  own parent goes in that family's `adopted`; a child placed partly
+  or wholly by working out, in its `inferred`. What is about a person
+  rather than an event goes in their `note`.
+- Names exactly as typed for each person. A family's name typed two
+  ways stays two ways, listed under the disagreements; surnames are
+  never normalized.
+- The files are laid out one fact per line. Edit lines; never load a
+  file and dump it back with a JSON library, which rewrites every line
+  and hides the change in the diff.
 
 `check_data.py` reports errors (exit 1) and warnings: a guess written
-as a vital event, or the same event given differently in two files
-(which would appear twice in the tree). Look at every warning.
+as a vital event, the same event given differently in two files
+(which would appear twice in the tree), or a Living value that doesn't
+follow the LIVING rule. Look at every warning.
 
-## Stage 4: GEDCOM
+## Stage 4: lineage files, down to the living
+
+A sheet stops at its principal's children. A **lineage file** takes a
+sheet's branch the rest of the way down, through the author's
+numbered descendant entries to the last one, so the tree reaches the
+living, which DNA matching needs. It hangs from a sheet whose children
+have no sheets of their own, and has a text page and a data file
+together: template `tools/templates/families/line-<sheet id>.txt` →
+`families/line-<sheet id>.txt`, and `data/line-<sheet id>.json`.
+`reference/SHEETS.txt` has the layout (descendants indented by
+generation with ids and cited facts, where the book disagrees, how the
+numbering and parentage were read, the author's entries quoted);
+`reference/DATA-FORMAT.txt` has the data.
+
+1. **Trial:** one lineage file, written by you, from a sheet whose
+   data is done. Show the user.
+2. **The rest,** by helper agents (`reference/briefs/lineage.txt`),
+   the trial as the model, a few at a time.
+
+Parentage comes from the author's numbering: an entry belongs to the
+nearest entry above it with the next lower number. Numbers get
+mistyped; where the parentage is read from the context, or the book
+doesn't say which marriage a child came from, the child is listed in
+that family's `inferred` and the file says why. The root sheet gets a
+`Lineage:` line naming its lineage file; `check_links.py` checks both
+ways. Records copied about people on lineage files get their record
+files, as on the sheets.
+
+## Stage 5: GEDCOM
 
     python3 -I tools/build_gedcom.py      # writes the file named in scan2gedcom.json
     python3 -m venv <scratch>/gv && <scratch>/gv/bin/pip install ged4py
     <scratch>/gv/bin/python3 -I tools/check_gedcom.py <file>.ged
 
-The build gives each person their sheet id as `REFN`, puts the book in
-as one source with the PDF page on every citation, makes one source per
-record file, and marks anyone whose Living is `yes` or `check` with
-`RESN privacy`. Check the file with an independent parser before the
-user imports it. Import into a **private** tree.
+The build reads sheets and lineage files alike. It gives each person
+their sheet id as `REFN`, puts the book in as one source with the PDF
+page on every citation, makes one source per record file, writes a
+person's `note` as a `NOTE`, gives an adopted child `PEDI adopted` on
+the family link and a step-child or an inferred one a `NOTE` there,
+writes Ancestry's per-parent tags (`_FREL` / `_MREL`: `Step`,
+`Natural`, `Adopted`) under the family's `CHIL` line, and marks anyone
+whose Living is `yes` or `check` with `RESN privacy`. The living are in
+the same file as everyone else. Check the file with an independent
+parser before the user imports it. Import into a **private** tree.
 
 ## Keeping work safe
 

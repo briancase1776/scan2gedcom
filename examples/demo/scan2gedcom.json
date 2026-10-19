@@ -3,6 +3,7 @@
   "author": "Ada Harlan Moss",
   "author_short": "Ada",
   "project": "Harlan Family",
-  "source_note": "Invented example book (4 PDF pages). Pages are cited by PDF page of the scan, as in the transcription.",
-  "gedcom": "gedcom/harlan-family.ged"
+  "source_note": "Invented example book (6 PDF pages). Pages are cited by PDF page of the scan, as in the transcription.",
+  "gedcom": "gedcom/harlan-family.ged",
+  "living_rule": {"born_by": 1915, "married_before": 1940, "child_born_before": 1940, "spouse_born_before": 1900}
 }

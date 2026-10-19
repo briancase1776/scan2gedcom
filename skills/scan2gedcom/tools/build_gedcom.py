@@ -1,4 +1,10 @@
-# Build one GEDCOM 5.5.1 file from data/*.json (see tools/DATA-FORMAT.txt).
+# Build one GEDCOM 5.5.1 file from data/*.json (see tools/DATA-FORMAT.txt),
+# sheets and lineage files alike. A person's "note" becomes a NOTE; a
+# family's "adopted" children get PEDI adopted on their FAMC link, its
+# "step" children a NOTE there naming the step-parent, and its "inferred"
+# children a NOTE saying the placement was partly or wholly worked out.
+# Under the FAM's CHIL line, step and adopted children also get the
+# per-parent tags Ancestry and Family Tree Maker read (_FREL, _MREL).
 # Run from the project root:  python3 -I tools/build_gedcom.py
 # Settings come from scan2gedcom.json in the project root:
 #   title, author, author_short (optional, e.g. "Ada"), source_note,
@@ -19,16 +25,19 @@ people, families = {}, {}
 for p in sorted(pathlib.Path("data").glob("*.json")):
     d = json.loads(p.read_text())
     for x in d["people"]:
-        cur = people.setdefault(x["id"], {**x, "facts": [], "aka": []})
+        cur = people.setdefault(x["id"], {**x, "facts": [], "aka": [], "notes": []})
         for a in x.get("aka", []):
             if a not in cur["aka"]: cur["aka"].append(a)
         for f in x.get("facts", []):
             if f not in cur["facts"]: cur["facts"].append(f)
+        if x.get("note") and x["note"] not in cur["notes"]: cur["notes"].append(x["note"])
         if LIVING_RANK[x["living"]] > LIVING_RANK[cur["living"]]: cur["living"] = x["living"]
     for x in d["families"]:
-        cur = families.setdefault(x["id"], {**x, "children": [], "facts": []})
-        for c in x.get("children", []):
-            if c not in cur["children"]: cur["children"].append(c)
+        cur = families.setdefault(x["id"], {**x, "children": [], "facts": [], "adopted": [], "inferred": [], "step": {}})
+        for k in ("children", "adopted", "inferred"):
+            for c in x.get(k, []):
+                if c not in cur[k]: cur[k].append(c)
+        cur["step"].update(x.get("step", {}))
         for f in x.get("facts", []):
             if f not in cur["facts"]: cur["facts"].append(f)
 
@@ -80,15 +89,16 @@ line(2, "NAME", f"{cfg['project']} family group sheets")
 line(1, "GEDC"); line(2, "VERS", "5.5.1"); line(2, "FORM", "LINEAGE-LINKED")
 line(1, "CHAR", "UTF-8")
 line(1, "SUBM", "@U1@")
-line(1, "NOTE", f"Built from the family group sheets drawn from \"{cfg['title']}\" by "
+line(1, "NOTE", f"Built from the family group sheets and lineage files drawn from \"{cfg['title']}\" by "
      f"{cfg['author']}. Each person's REFN is the id used on the sheets. Where the book "
-     "disagrees with itself, each reading is a separate event with its own page citation.")
+     "disagrees with itself, each reading is a separate event with its own page citation. "
+     "People marked RESN privacy may be living.")
 line(0, "@U1@ SUBM"); line(1, "NAME", f"{cfg['project']} transcription project")
 
 for pid in sorted(people):
     x = people[pid]
     line(0, f"{ind[pid]} INDI")
-    line(1, "NAME", f"{x['given']} /{x['surname']}/")
+    line(1, "NAME", f"{x['given']} /{x['surname']}/".strip())
     if x["given"]: line(2, "GIVN", x["given"])
     if x["surname"]: line(2, "SURN", x["surname"])
     for a in x["aka"]:
@@ -96,9 +106,18 @@ for pid in sorted(people):
     line(1, "SEX", x["sex"])
     if x["living"] != "no": line(1, "RESN", "privacy")
     line(1, "REFN", pid); line(2, "TYPE", REFN_TYPE)
+    for n in x["notes"]: line(1, "NOTE", n)
     for f in x["facts"]: fact(f)
     for fid in sorted(families):
-        if pid in families[fid]["children"]: line(1, "FAMC", fam[fid])
+        if pid in families[fid]["children"]:
+            line(1, "FAMC", fam[fid])
+            if pid in families[fid]["adopted"]: line(2, "PEDI", "adopted")
+            if pid in families[fid]["step"]:
+                line(2, "NOTE", f"Step-child of the {families[fid]['step'][pid]} in this family; "
+                                "the child of the other parent")
+            if pid in families[fid]["inferred"]:
+                line(2, "NOTE", "Placement in this family partly or wholly worked out [I] "
+                                "(one or both parents); see the sheet")
     for fid in sorted(families):
         if pid in (families[fid].get("husband"), families[fid].get("wife")): line(1, "FAMS", fam[fid])
 
@@ -107,7 +126,13 @@ for fid in sorted(families):
     line(0, f"{fam[fid]} FAM")
     if x.get("husband"): line(1, "HUSB", ind[x["husband"]])
     if x.get("wife"): line(1, "WIFE", ind[x["wife"]])
-    for c in x["children"]: line(1, "CHIL", ind[c])
+    for c in x["children"]:
+        line(1, "CHIL", ind[c])
+        if c in x["step"]:   # Ancestry / Family Tree Maker: the link to each parent
+            line(2, "_FREL", "Step" if x["step"][c] == "husband" else "Natural")
+            line(2, "_MREL", "Step" if x["step"][c] == "wife" else "Natural")
+        elif c in x["adopted"]:
+            line(2, "_FREL", "Adopted"); line(2, "_MREL", "Adopted")
     for f in x["facts"]: fact(f)
     line(1, "REFN", fid)
 
