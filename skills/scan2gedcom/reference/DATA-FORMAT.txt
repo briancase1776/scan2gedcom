@@ -31,9 +31,11 @@ FILE
   whose child is the spouse), a step-child (in their own parents'
   family; see FAMILY), a child of an earlier marriage. Nobody is kept
   in notes only. A parent the book only guesses at ("family tradition
-  says") is not linked as a parent: put the guess in the child's
-  "note". One output: the living are in the same data and the same
-  GEDCOM, flagged by their Living value (see LIVING).
+  says") goes in as a person too, with a family that links them to
+  the child, and the child is listed in that family's "inferred", so
+  the tree marks the link as not proven. One output: the living are
+  in the same data and the same GEDCOM, flagged by their Living value
+  (see LIVING).
 
   Layout: one fact per line, as in examples/demo/data/. It keeps diffs
   small and files easy to compare with the sheet. To change a file,
@@ -61,9 +63,9 @@ PERSON
     "facts":   [ FACT, ... ]
   }
 
-  Use "note" for what is about the person rather than an event (a
-  traditional parent, a name left blank in the book), not an EVEN
-  fact such as "Son of ...".
+  Use "note" for what is about the person rather than an event (why a
+  parent is only guessed at or worked out, a name left blank in the
+  book), not an EVEN fact such as "Son of ...".
 
   Names as typed. "given" and "surname" are spelled as the book types
   them for that person. When one family's name is typed two ways (one
@@ -87,9 +89,10 @@ FAMILY
     "inferred": ["<person id>", ...],   optional: children placed in
                                         this family partly or wholly by
                                         working out [I], e.g. which
-                                        marriage a child came from; the
-                                        GEDCOM link carries a note
-                                        saying so
+                                        marriage a child came from, or
+                                        with a parent the book only
+                                        guesses at; the GEDCOM link
+                                        carries a note saying so
     "step":     {"<person id>": "husband" | "wife"},
                                         optional: step-children in this
                                         family, each naming which
@@ -100,8 +103,8 @@ FAMILY
 
   Every id in "adopted", "inferred" and "step" is also in "children".
   An inferred placement can be one parent named by the book and the
-  other worked out, or both worked out; the sheet or lineage file says
-  which parent, and how.
+  other worked out or only guessed at in the book, or both; the sheet
+  or lineage file says which parent, and how.
 
   A step-child is a child of their own parents' family (a parent may
   be null if not named). They may also go in the step-family, listed

@@ -3,7 +3,7 @@
   "people": [
     {
       "id": "harlan-abel-1801", "given": "Abel", "surname": "Harlan", "sex": "M", "living": "no",
-      "note": "His father is \"not known for certain\"; family tradition makes him a son of Thomas Harlan (PDF 2). Not linked as a parent: a guess.",
+      "note": "His father is \"not known for certain\"; only family tradition makes him a son of Thomas Harlan (PDF 2). Linked to Thomas as inferred: a tradition, not a record.",
       "facts": [
         {"type": "BIRT", "date": "4 MAR 1801", "place": "Linden Co.", "kind": "F", "cite": ["PDF 2"]},
         {"type": "BIRT", "date": "14 MAR 1801", "kind": "R", "cite": ["PDF 4"], "record": "rec-harlan-family-bible", "note": "Family Bible: \"March 14[?] 1801\"; uncertain reading"},
@@ -42,6 +42,11 @@
         {"type": "BIRT", "date": "1830", "kind": "F", "cite": ["PDF 2"]},
         {"type": "DEAT", "kind": "F", "cite": ["PDF 2"], "note": "\"d. young\"; no date"}
       ]
+    },
+    {
+      "id": "harlan-thomas-x", "given": "Thomas", "surname": "Harlan", "sex": "M", "living": "no",
+      "note": "Abel's father by family tradition only: \"family tradition say he was a son of Thomas Harlan\" (PDF 2). The book gives nothing else about him.",
+      "facts": []
     }
   ],
   "families": [
@@ -52,6 +57,13 @@
       "facts": [
         {"type": "MARR", "date": "12 JUN 1824", "place": "her father's house on Pell Creek", "kind": "F", "cite": ["PDF 2"]}
       ]
+    },
+    {
+      "id": "fam-harlan-thomas-x-x",
+      "husband": "harlan-thomas-x", "wife": null,
+      "children": ["harlan-abel-1801"],
+      "inferred": ["harlan-abel-1801"],
+      "facts": []
     }
   ]
 }

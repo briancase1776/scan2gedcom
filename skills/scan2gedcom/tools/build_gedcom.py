@@ -2,7 +2,7 @@
 # sheets and lineage files alike. A person's "note" becomes a NOTE; a
 # family's "adopted" children get PEDI adopted on their FAMC link, its
 # "step" children a NOTE there naming the step-parent, and its "inferred"
-# children a NOTE saying the placement was partly or wholly worked out.
+# children a NOTE saying the placement was worked out or only guessed at.
 # Under the FAM's CHIL line, step and adopted children also get the
 # per-parent tags Ancestry and Family Tree Maker read (_FREL, _MREL).
 # Run from the project root:  python3 -I tools/build_gedcom.py
@@ -116,7 +116,7 @@ for pid in sorted(people):
                 line(2, "NOTE", f"Step-child of the {families[fid]['step'][pid]} in this family; "
                                 "the child of the other parent")
             if pid in families[fid]["inferred"]:
-                line(2, "NOTE", "Placement in this family partly or wholly worked out [I] "
+                line(2, "NOTE", "Placement in this family worked out [I] or only guessed at in the book "
                                 "(one or both parents); see the sheet")
     for fid in sorted(families):
         if pid in (families[fid].get("husband"), families[fid].get("wife")): line(1, "FAMS", fam[fid])

@@ -78,7 +78,9 @@ nearest entry above it with the next lower number. Where a number is
 missing, repeated or mistyped, or the author doesn't say which
 marriage a child came from, give the parentage you read from the
 context [I], say which parent and why under NUMBERING AND PARENTAGE,
-and list the child in that family's "inferred".
+and list the child in that family's "inferred". A parent the book
+only guesses at ("family tradition says") is linked the same way,
+with the child in "inferred".
 
 LIVING: <the LIVING rule from DATA-FORMAT.txt, with the project's
 years, e.g.: "no" if dead, or born 1915 or earlier, or, with no birth

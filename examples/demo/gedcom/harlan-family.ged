@@ -38,7 +38,7 @@
 3 NOTE [F] Ada says it
 1 FAMC @F1@
 1 FAMS @F3@
-1 FAMS @F8@
+1 FAMS @F9@
 0 @I3@ INDI
 1 NAME Abel /Harlan/
 2 GIVN Abel
@@ -46,7 +46,7 @@
 1 SEX M
 1 REFN harlan-abel-1801
 2 TYPE harlan-family-sheets
-1 NOTE His father is "not known for certain"; family tradition makes him a son of Thomas Harlan (PDF 2). Not linked as a parent: a guess.
+1 NOTE His father is "not known for certain"; only family tradition makes him a son of Thomas Harlan (PDF 2). Linked to Thomas as inferred: a tradition, not a record.
 1 BIRT
 2 DATE 4 MAR 1801
 2 PLAC Linden Co.
@@ -87,6 +87,8 @@
 3 NOTE [R] a record Ada copied or abstracted
 2 SOUR @S2@
 3 PAGE PDF 3
+1 FAMC @F7@
+2 NOTE Placement in this family worked out [I] or only guessed at in the book (one or both parents); see the sheet
 1 FAMS @F2@
 0 @I4@ INDI
 1 NAME Carol /Harlan/
@@ -178,7 +180,7 @@
 3 NOTE [Q] someone Ada quotes
 2 SOUR @S3@
 3 PAGE PDF 6
-1 FAMC @F7@
+1 FAMC @F8@
 1 FAMS @F5@
 0 @I9@ INDI
 1 NAME Josiah /Harlan/
@@ -199,7 +201,7 @@
 3 PAGE PDF 5
 3 NOTE [F] Ada says it
 1 FAMC @F4@
-2 NOTE Placement in this family partly or wholly worked out [I] (one or both parents); see the sheet
+2 NOTE Placement in this family worked out [I] or only guessed at in the book (one or both parents); see the sheet
 1 FAMS @F6@
 0 @I10@ INDI
 1 NAME Lydia /Harlan/
@@ -215,7 +217,7 @@
 3 PAGE PDF 2
 3 NOTE [F] Ada says it
 1 FAMC @F2@
-1 FAMS @F9@
+1 FAMS @F10@
 0 @I11@ INDI
 1 NAME Thomas /Harlan/
 2 GIVN Thomas
@@ -235,6 +237,15 @@
 3 NOTE [F] Ada says it
 1 FAMC @F2@
 0 @I12@ INDI
+1 NAME Thomas /Harlan/
+2 GIVN Thomas
+2 SURN Harlan
+1 SEX M
+1 REFN harlan-thomas-x
+2 TYPE harlan-family-sheets
+1 NOTE Abel's father by family tradition only: "family tradition say he was a son of Thomas Harlan" (PDF 2). The book gives nothing else about him.
+1 FAMS @F7@
+0 @I13@ INDI
 1 NAME Walter /Harlan/
 2 GIVN Walter
 2 SURN Harlan
@@ -282,8 +293,8 @@
 2 SOUR @S3@
 3 PAGE PDF 6
 1 FAMC @F6@
-1 FAMS @F7@
-0 @I13@ INDI
+1 FAMS @F8@
+0 @I14@ INDI
 1 NAME Grace /Lomax/
 2 GIVN Grace
 2 SURN Lomax
@@ -297,7 +308,7 @@
 3 PAGE PDF 5
 3 NOTE [F] Ada says it
 1 FAMS @F5@
-0 @I14@ INDI
+0 @I15@ INDI
 1 NAME Ruth /Pell/
 2 GIVN Ruth
 2 SURN Pell
@@ -341,7 +352,7 @@
 2 SOUR @S2@
 3 PAGE PDF 3
 1 FAMS @F2@
-0 @I15@ INDI
+0 @I16@ INDI
 1 NAME Amos /Pike/
 2 GIVN Amos
 2 SURN Pike
@@ -353,8 +364,8 @@
 2 SOUR @S1@
 3 PAGE PDF 5
 3 NOTE [F] Ada says it
-1 FAMS @F8@
-0 @I16@ INDI
+1 FAMS @F9@
+0 @I17@ INDI
 1 NAME Silas /Pike/
 2 GIVN Silas
 2 SURN Pike
@@ -369,8 +380,8 @@
 3 NOTE [F] Ada says it
 1 FAMC @F3@
 2 NOTE Step-child of the husband in this family; the child of the other parent
-1 FAMC @F8@
-0 @I17@ INDI
+1 FAMC @F9@
+0 @I18@ INDI
 1 NAME Martha /Quill/
 2 GIVN Martha
 2 SURN Quill
@@ -383,7 +394,7 @@
 3 PAGE PDF 5
 3 NOTE [F] Ada says it
 1 FAMS @F4@
-0 @I18@ INDI
+0 @I19@ INDI
 1 NAME Emma /Rusk/
 2 GIVN Emma
 2 SURN Rusk
@@ -397,23 +408,23 @@
 3 PAGE PDF 5
 3 NOTE [F] Ada says it
 1 FAMS @F6@
-0 @I19@ INDI
+0 @I20@ INDI
 1 NAME /Stewart/
 2 SURN Stewart
 1 SEX M
 1 REFN stewart-x-x
 2 TYPE harlan-family-sheets
 1 NOTE Lydia Harlan's husband. His given name is a blank in the book: "m. ___ Stewart" (PDF 2, PDF 5).
-1 FAMS @F9@
-0 @I20@ INDI
+1 FAMS @F10@
+0 @I21@ INDI
 1 NAME Ida /Venn/
 2 GIVN Ida
 2 SURN Venn
 1 SEX F
 1 REFN venn-ida-x
 2 TYPE harlan-family-sheets
-1 FAMS @F7@
-0 @I21@ INDI
+1 FAMS @F8@
+0 @I22@ INDI
 1 NAME Hannah //
 2 GIVN Hannah
 1 NAME Hannah Dunn
@@ -430,12 +441,12 @@
 1 FAMS @F1@
 0 @F1@ FAM
 1 HUSB @I1@
-1 WIFE @I21@
+1 WIFE @I22@
 1 CHIL @I2@
 1 REFN fam-dunn-jacob-x-x-hannah-x
 0 @F2@ FAM
 1 HUSB @I3@
-1 WIFE @I14@
+1 WIFE @I15@
 1 CHIL @I7@
 1 CHIL @I10@
 1 CHIL @I11@
@@ -449,7 +460,7 @@
 0 @F3@ FAM
 1 HUSB @I7@
 1 WIFE @I2@
-1 CHIL @I16@
+1 CHIL @I17@
 2 _FREL Step
 2 _MREL Natural
 1 CHIL @I5@
@@ -462,7 +473,7 @@
 1 REFN fam-harlan-ezra-1825-dunn-sarah-1834
 0 @F4@ FAM
 1 HUSB @I7@
-1 WIFE @I17@
+1 WIFE @I18@
 1 CHIL @I9@
 1 MARR
 2 DATE 1848
@@ -473,7 +484,7 @@
 1 REFN fam-harlan-ezra-1825-quill-martha-x
 0 @F5@ FAM
 1 HUSB @I8@
-1 WIFE @I13@
+1 WIFE @I14@
 1 CHIL @I4@
 1 CHIL @I6@
 2 _FREL Adopted
@@ -486,8 +497,8 @@
 1 REFN fam-harlan-howard-1912-lomax-grace-1918
 0 @F6@ FAM
 1 HUSB @I9@
-1 WIFE @I18@
-1 CHIL @I12@
+1 WIFE @I19@
+1 CHIL @I13@
 1 MARR
 2 DATE 1874
 2 SOUR @S1@
@@ -496,7 +507,11 @@
 1 REFN fam-harlan-josiah-1850-rusk-emma-x
 0 @F7@ FAM
 1 HUSB @I12@
-1 WIFE @I20@
+1 CHIL @I3@
+1 REFN fam-harlan-thomas-x-x
+0 @F8@ FAM
+1 HUSB @I13@
+1 WIFE @I21@
 1 CHIL @I8@
 1 MARR
 2 DATE 1905
@@ -512,18 +527,18 @@
 2 SOUR @S3@
 3 PAGE PDF 6
 1 REFN fam-harlan-walter-1878-venn-ida-x
-0 @F8@ FAM
-1 HUSB @I15@
+0 @F9@ FAM
+1 HUSB @I16@
 1 WIFE @I2@
-1 CHIL @I16@
+1 CHIL @I17@
 1 MARR
 2 NOTE Sarah was the "widow of Amos Pike"; no date
 2 SOUR @S1@
 3 PAGE PDF 5
 3 NOTE [F] Ada says it
 1 REFN fam-pike-amos-x-dunn-sarah-1834
-0 @F9@ FAM
-1 HUSB @I19@
+0 @F10@ FAM
+1 HUSB @I20@
 1 WIFE @I10@
 1 MARR
 2 NOTE "m. ___ Stewart"; no date

@@ -188,8 +188,9 @@ Rules that matter most:
   adopted them: that adoption is an `EVEN` fact on the child, any new
   name an `aka`). A child adopted by people neither of whom is their
   own parent goes in that family's `adopted`; a child placed partly
-  or wholly by working out, in its `inferred`. What is about a person
-  rather than an event goes in their `note`.
+  or wholly by working out, or with a parent the book only guesses
+  at ("family tradition says"), in its `inferred`. What is about a
+  person rather than an event goes in their `note`.
 - Names exactly as typed for each person. A family's name typed two
   ways stays two ways, listed under the disagreements; surnames are
   never normalized.

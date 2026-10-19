@@ -28,7 +28,8 @@ FOR EACH SHEET write data/<sheet id>.json containing:
   sheet's order; a child adopted by people neither of whom is their
   own parent also goes in the family's "adopted", and a child the
   sheet places in the family partly or wholly by working out [I]
-  (which marriage, which parent) in its "inferred";
+  (which marriage, which parent), or with a parent the book only
+  guesses at ("family tradition says"), in its "inferred";
 - everyone else the sheet names as family, living or not, as a
   person: a spouse's parents, with their own family whose child is
   the spouse; a step-child, in the family of their own parents (a
@@ -36,15 +37,17 @@ FOR EACH SHEET write data/<sheet id>.json containing:
   a "step" entry naming the step-parent ("husband" or "wife"), never
   as a plain child of the step-parent. If the step-parent adopted
   them it is still "step": the adoption is an EVEN fact on the child
-  and any new name an "aka". Nobody is kept in notes only.
+  and any new name an "aka"; a parent the book only guesses at, with
+  a family linking them to the child (the child in its "inferred").
+  Nobody is kept in notes only.
 Use exactly the ids the sheet uses. Names exactly as the book types
 them for each person; don't normalize a surname typed two ways in one
 family. A woman's surname is her maiden name ("" if unknown); other
-names go in "aka". Sex from the book; if
-it doesn't say, from a clearly male or female given name; "U" only if
-neither. What is about a person rather than an event (a traditional
-parent, a name the book leaves blank) goes in the person's "note",
-with its pages, not in an EVEN fact.
+names go in "aka". Sex from the book; if it doesn't say, from a
+clearly male or female given name; "U" only if neither. What is about
+a person rather than an event (why a parent is only guessed at, a
+name the book leaves blank) goes in the person's "note", with its
+pages, not in an EVEN fact.
 
 MATCHING THE PARENT FILE: the principal also appears as a child in the
 parents' data file. Where the sheet gives the same fact, copy that
