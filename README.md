@@ -13,7 +13,8 @@ family tree you can trust, one checked stage at a time:
 3. **Structured data:** one JSON file per sheet, checked by a script.
 4. **Lineage files:** each line taken on down through the author's
    numbered descendant lists to the living, as a text page and a data
-   file, so the tree can be used for DNA matching.
+   file, so the tree can be used for DNA matching. A script checks
+   that every numbered entry in the book is in the data.
 5. **GEDCOM 5.5.1:** one file for Ancestry, DNATools or any tree
    program, with page citations on every event, conflicting readings
    kept side by side, adoptions and worked-out placements marked on
@@ -41,10 +42,12 @@ Python 3. `check_gedcom.py` needs `ged4py` (`pip install ged4py`).
     skills/scan2gedcom/reference/      transcription rules, sheet,
                                        record and lineage file layout,
                                        data format and living rule,
+                                       running helpers at scale,
                                        briefs for helper agents
     skills/scan2gedcom/tools/          render.py, check_links.py,
-                                       check_data.py, build_gedcom.py,
-                                       check_gedcom.py
+                                       check_data.py, check_coverage.py,
+                                       build_gedcom.py, check_gedcom.py,
+                                       commit_helper.sh
     examples/demo/                     an invented six-page book taken
                                        through every stage
 
@@ -55,6 +58,7 @@ To see the tools work, from `examples/demo`:
         tools/templates/families/*.txt tools/templates/records/*.txt
     python3 -I $T/check_links.py
     python3 -I $T/check_data.py
+    python3 -I $T/check_coverage.py
     python3 -I $T/build_gedcom.py
     python3 -I $T/check_gedcom.py gedcom/harlan-family.ged
 

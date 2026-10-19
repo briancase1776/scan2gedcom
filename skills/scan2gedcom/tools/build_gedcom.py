@@ -1,8 +1,9 @@
 # Build one GEDCOM 5.5.1 file from data/*.json (see tools/DATA-FORMAT.txt),
-# sheets and lineage files alike. A person's "note" becomes a NOTE; a
-# family's "adopted" children get PEDI adopted on their FAMC link, its
-# "step" children a NOTE there naming the step-parent, and its "inferred"
-# children a NOTE saying the placement was worked out or only guessed at.
+# sheets and lineage files alike. A person's or a family's "note"
+# becomes a NOTE; a family's "adopted" children get PEDI adopted on
+# their FAMC link, its "step" children a NOTE there naming the
+# step-parent, and its "inferred" children a NOTE saying the placement
+# was worked out or only guessed at.
 # Under the FAM's CHIL line, step and adopted children also get the
 # per-parent tags Ancestry and Family Tree Maker read (_FREL, _MREL).
 # Run from the project root:  python3 -I tools/build_gedcom.py
@@ -33,7 +34,9 @@ for p in sorted(pathlib.Path("data").glob("*.json")):
         if x.get("note") and x["note"] not in cur["notes"]: cur["notes"].append(x["note"])
         if LIVING_RANK[x["living"]] > LIVING_RANK[cur["living"]]: cur["living"] = x["living"]
     for x in d["families"]:
-        cur = families.setdefault(x["id"], {**x, "children": [], "facts": [], "adopted": [], "inferred": [], "step": {}})
+        cur = families.setdefault(x["id"], {**x, "children": [], "facts": [], "adopted": [], "inferred": [], "step": {},
+                                            "notes": []})
+        if x.get("note") and x["note"] not in cur["notes"]: cur["notes"].append(x["note"])
         for k in ("children", "adopted", "inferred"):
             for c in x.get(k, []):
                 if c not in cur[k]: cur[k].append(c)
@@ -134,6 +137,7 @@ for fid in sorted(families):
         elif c in x["adopted"]:
             line(2, "_FREL", "Adopted"); line(2, "_MREL", "Adopted")
     for f in x["facts"]: fact(f)
+    for n in x["notes"]: line(1, "NOTE", n)
     line(1, "REFN", fid)
 
 line(0, f"{src['book']} SOUR")

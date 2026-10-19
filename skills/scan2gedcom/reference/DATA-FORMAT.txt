@@ -28,8 +28,9 @@ FILE
 
   Everyone the book names as family goes in as a person, living or
   not, with the family that links them: a spouse's parents (a family
-  whose child is the spouse), a step-child (in their own parents'
-  family; see FAMILY), a child of an earlier marriage. Nobody is kept
+  whose child is the spouse) and the brothers and sisters of the
+  spouse the book names, a step-child (in their own parents' family;
+  see FAMILY), a child of an earlier marriage. Nobody is kept
   in notes only. A parent the book only guesses at ("family tradition
   says") goes in as a person too, with a family that links them to
   the child, and the child is listed in that family's "inferred", so
@@ -65,7 +66,8 @@ PERSON
 
   Use "note" for what is about the person rather than an event (why a
   parent is only guessed at or worked out, a name left blank in the
-  book), not an EVEN fact such as "Son of ...".
+  book, which person a spouse married), not an EVEN fact such as "Son
+  of ...". A family's "note" is the same for the family.
 
   Names as typed. "given" and "surname" are spelled as the book types
   them for that person. When one family's name is typed two ways (one
@@ -98,6 +100,10 @@ FAMILY
                                         family, each naming which
                                         parent is the step-parent (see
                                         below)
+    "note":     "...",                  optional: about the family, not
+                                        one event, with its pages
+                                        (written to the GEDCOM as a NOTE
+                                        on the family)
     "facts":    [ FACT, ... ]           MARR, DIV
   }
 
@@ -165,23 +171,58 @@ DATES  (GEDCOM 5.5.1)
   A date that won't fit (a typing slip, a "[?]" reading) goes in as
   the best GEDCOM date with the book's text in "note"; if there is no
   sensible date, leave "date" out and put the text in "note". The
-  words in brackets may not themselves contain brackets.
+  words in brackets may not themselves contain brackets. A year that
+  can't be right: see HARD CASES.
+
+HARD CASES
+  Whose spouse?  The book names a husband or wife without saying which
+    person they married (an "m. ..." line after two brothers' entries).
+    Put them in the likelier family and say so in their "note": which
+    person, and why [I], with the pages.
+  A year that can't be right.  A typed year that is impossible (a
+    birth after the person's own death or marriage, a year still to
+    come) is not a date. Keep the day and month as a date phrase,
+    "(12 Mar)", the book's text in "note" ("typed \"b. 12 Mar 2019\""),
+    and give the person an x id (harlan-<given>-x), so the bad year
+    is in no id. check_data.py warns about a year still to come, a birth
+    after a death, and an id whose year is in none of the person's
+    dates.
+  A partner, not a spouse.  A partner or an engagement that isn't a
+    marriage ("engaged to", "lived with") is a family with no MARR
+    fact and a "note" giving the book's words and pages. The LIVING
+    rule's "married" means a MARR fact. check_data.py warns about a
+    family with no marriage, no children and no note.
+  People the book only counts.  "Has 2 ch.", "one grandchild": no name
+    and nothing else. They are counted in the parent's "note" ("2
+    children, not named (PDF 9)"), not made people, unless
+    "unnamed_placeholders" is true in scan2gedcom.json: then each is a
+    person with given "", id <surname>-unnamed-x (-2, -3 ...), no facts
+    and a note with the book's words, a child in the parent's family.
+    It is off unless the user turns it on; check_data.py warns about a
+    placeholder while it is off. A child the book gives a fact for
+    ("infant son, d. 1922") is a person either way.
 
 LIVING
   The sheet's Living line, and "living" here, follow one rule:
     "no"     if the person is dead (a death or burial is given), or
              was born 1915 or earlier, or, with no birth year, married
-             before 1940, had a child born before 1940, or had a
-             spouse born before 1900 [I];
+             before 1940, had a child born before 1940, had a spouse
+             born before 1900, or had a grandchild born before 1960 or
+             married before 1980 [I];
     "check"  otherwise;
     "yes"    only where the book says the person is living.
   So nobody born in the 1800s is marked living. Give the reason on the
-  Living line: "no [I]: married 1874", "check: born 1941".
+  Living line: "no [I]: married 1874", "check: born 1941", "no [I]: a
+  grandchild born 1948". A step-child (or a step-child's child) is not
+  counted as the step-parent's child or grandchild.
   The years are a choice, not a fact: agree them with the user. They
   are set in scan2gedcom.json, and these are the defaults if it is
   left out:
     "living_rule": {"born_by": 1915, "married_before": 1940,
-                    "child_born_before": 1940, "spouse_born_before": 1900}
+                    "child_born_before": 1940,
+                    "spouse_born_before": 1900,
+                    "grandchild_born_before": 1960,
+                    "grandchild_married_before": 1980}
   check_data.py warns about anyone whose "living" doesn't follow the
   rule. "check" and "yes" only add a privacy flag (RESN privacy);
   nobody is left out for being living. The project and the tree stay
@@ -192,4 +233,5 @@ RULES
   added that the sheet doesn't say, and nothing the book gives is left
   out to save time: every record the book copies or abstracts (an
   obituary, a notice, a deed) gets its record file, on a lineage file
-  as on a sheet.
+  as on a sheet. A file that starts citing a record someone else made
+  is added to that record's "Used on:" line (SHEETS.txt).

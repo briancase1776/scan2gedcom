@@ -1,0 +1,79 @@
+RUNNING HELPERS AT SCALE
+How to share the rest of a book among helper agents, in waves, and
+commit their work safely. SKILL.md has the outline.
+
+PRIORITY
+  Get every person, family, link and cited fact into the data first;
+  the research comes after. Helpers keep sheet text to the minimum and
+  give a puzzle a one-line note, or put it in their report, and move
+  on. Nothing the book gives is dropped: conflicting readings and
+  record files are data and still go in.
+
+THE USER SETS THE PACE
+  The user may cap how many helpers run at once; never go over it. If
+  they ask to approve each wave, show the plan for it (units, helpers,
+  pages) and wait for their yes before starting it.
+
+1. SURVEY, READ ONLY
+  Before the first wave, size everything that is left over the WHOLE
+  book. A survey that only follows the existing sheets down misses
+  whole sections: a branch the author starts on a later page, a second
+  numbering, an appendix, families that married in. Start from
+  tools/check_coverage.py, whose list covers every page, then read
+  the pages it lists. The survey writes nothing in the project. Its
+  result, for the user, is a table of WORK UNITS:
+    unit    the root (a sheet id, or the first entry of a new branch)
+    pages   PDF pages, and how many numbered entries
+    shares  families it shares with other units (in-laws, a couple in
+            two branches), and records it copies
+  A unit is about 12 pages or 150 numbered entries, whichever comes
+  first, cut at the entry of one of the root's children, never inside
+  a family.
+
+2. HELPERS AND WAVES
+  - Units whose families share in-laws go to one helper, so those
+    people are made once.
+  - A family shared between branches is made in one wave. Units that
+    also need it go in a later wave, whose helpers find its ids in
+    data/ and reuse them; name those ids in their briefs.
+  - Each helper gets its brief (briefs/lineage.txt, sheets.txt or
+    sweep.txt) and its own units.
+
+3. HELPERS WRITE ONLY THEIR OWN FILES
+  Their templates, rendered files and data files, and the record files
+  they make. A lineage helper may also add its root sheet's
+  "Lineage:" line and re-render it, and make a fact it shares with the
+  root's data identical there, line by line: nobody else touches that
+  sheet in the wave. Any other change a file needs (a fact in another
+  sheet's data, a "Used on:" line on an existing record) goes in the
+  report; the coordinator makes it.
+
+4. COMMIT EACH HELPER ON ITS OWN
+  Helpers share one working tree, so a check of the whole tree can
+  pass only because of another helper's half-written files. When a
+  helper has finished, after the spot-check, from the project root:
+      tools/commit_helper.sh <message file> <every file it wrote>
+  It copies those files alone onto HEAD in a temporary git worktree,
+  renders every template there, refuses if a rendered file is stale
+  or not named, runs check_links.py and check_data.py, and commits
+  exactly those files only if both pass. A refusal goes back to the
+  helper, or is fixed by you, before anything else is committed.
+
+5. AFTER EACH WAVE
+  - Make the changes the helpers reported, and commit them.
+  - Duplicates. One person under two ids (the same name with a year
+    and with x, a name typed two ways, the same spouse or parents),
+    and one record in two files (the same date and people). For each
+    id the wave added, search data/ for the same given name and
+    surname. check_data.py's near-duplicate warnings find one id made
+    twice with different facts. Keep the id made first, change the
+    later files to it, make the facts identical, delete the extra
+    record file, render again.
+  - Coverage. python3 -I tools/check_coverage.py: the wave's units
+    should be off its list. Anything still on it goes in a later unit.
+
+6. AT THE END
+  check_coverage.py lists nothing. The only pages it may skip are
+  covers, blanks, and pages known to be missing from the scan that the
+  user has agreed to put in its skip_pages. That is what "all" means.
+  Then build the GEDCOM.

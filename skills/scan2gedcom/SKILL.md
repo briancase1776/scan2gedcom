@@ -17,12 +17,14 @@ is kept with its own pages.
 This skill's directory (shown when the skill loads) holds:
 
     tools/          render.py  check_data.py  check_links.py
-                    build_gedcom.py  check_gedcom.py
+                    check_coverage.py  build_gedcom.py  check_gedcom.py
+                    commit_helper.sh
     reference/      CONVENTIONS.txt   transcription rules
                     SHEETS.txt        group sheet, record and lineage
                                       file layout
                     DATA-FORMAT.txt   JSON format for the GEDCOM build,
-                                      and the LIVING rule
+                                      hard cases, and the LIVING rule
+                    ORCHESTRATION.txt running helpers at scale
                     briefs/           briefs for helper agents
     ../../examples/demo/   a tiny invented book taken through every stage
 
@@ -48,6 +50,8 @@ invented family, and every tool runs on it.
   about the book before you send it.
 - **Commit explicit file lists.** Never `git add <directory>` while
   agents are writing into it; you will commit their drafts.
+  `tools/commit_helper.sh` commits one helper's files only after
+  checking them on their own (see Running helpers at scale).
 
 ## Stage 0: set up
 
@@ -63,18 +67,22 @@ invented family, and every tool runs on it.
 3. Talk the plan over with the user before starting. Ask what they
    want from it (a tree for DNA matching needs every line down to the
    living) and who in the book may be living, and agree the years of
-   the LIVING rule (`reference/DATA-FORMAT.txt`).
+   the LIVING rule (`reference/DATA-FORMAT.txt`). Ask whether people
+   the book only counts ("has 2 ch.") should get placeholder persons;
+   the default is no (HARD CASES in `reference/DATA-FORMAT.txt`).
 4. In the project repository:
 
        mkdir -p transcription tools/templates/families tools/templates/records data
-       cp <skill-dir>/tools/*.py tools/
+       cp <skill-dir>/tools/* tools/
        cp <skill-dir>/reference/CONVENTIONS.txt transcription/
        cp <skill-dir>/reference/DATA-FORMAT.txt tools/
 
    and write `scan2gedcom.json` at the root (see
    `examples/demo/scan2gedcom.json`; `living_rule` holds the agreed
-   years). The project keeps its own copy of
-   the tools, so later changes to the skill don't change old results.
+   years, `unnamed_placeholders` the answer about placeholders, and
+   `coverage` how the book's numbered entries start). The project
+   keeps its own copy of the tools, so later changes to the skill
+   don't change old results.
 5. Edit `transcription/CONVENTIONS.txt` for this book (title, author,
    page count, any marks the book needs). Every change to the rules
    goes in that file, so all workers follow the same ones.
@@ -148,14 +156,16 @@ each child's. Records are shared, so agents running at the same time
 make duplicates: after each round, look for records with the same date
 and people, keep one, fix the links, render again. Every record the
 book copies or abstracts gets its file; nothing is left out to save
-time.
+time. A record's `Used on:` line names every file that cites it;
+`check_links.py` warns about one that is missing.
 
 **Living people.** Everyone the book names as family goes in, living
 or not: one set of sheets, data and GEDCOM, with the living flagged.
 Living is "no" if the person died, or was born 1915 or earlier, or
-(with no birth year) married before 1940, had a child born before 1940
-or had a spouse born before 1900 [I]; "check" otherwise; so nobody
-born in the 1800s is marked living. Every Living line gives its reason
+(with no birth year) married before 1940, had a child born before
+1940, had a spouse born before 1900, or had a grandchild born before
+1960 or married before 1980 [I]; "check" otherwise; so nobody born in
+the 1800s is marked living. Every Living line gives its reason
 ("no [I]: married 1874"). The years are the user's choice, set in
 `scan2gedcom.json`; the rule is under LIVING in
 `reference/DATA-FORMAT.txt`.
@@ -190,7 +200,15 @@ Rules that matter most:
   own parent goes in that family's `adopted`; a child placed partly
   or wholly by working out, or with a parent the book only guesses
   at ("family tradition says"), in its `inferred`. What is about a
-  person rather than an event goes in their `note`.
+  person or a family rather than an event goes in its `note`.
+- **Hard cases** (`reference/DATA-FORMAT.txt`): a spouse the book
+  doesn't tie to one person goes in the likelier family, with a note
+  saying so; a typed year that can't be right becomes a date phrase
+  of the day and month, with the book's text in the note and an `x`
+  id; a partner or an engagement is a family with no marriage and a
+  note; people the book only counts ("has 2 ch.") are counted in the
+  parent's note, not made people, unless the user turned
+  `unnamed_placeholders` on.
 - Names exactly as typed for each person. A family's name typed two
   ways stays two ways, listed under the disagreements; surnames are
   never normalized.
@@ -200,8 +218,10 @@ Rules that matter most:
 
 `check_data.py` reports errors (exit 1) and warnings: a guess written
 as a vital event, the same event given differently in two files
-(which would appear twice in the tree), or a Living value that doesn't
-follow the LIVING rule. Look at every warning.
+(which would appear twice in the tree), a Living value that doesn't
+follow the LIVING rule, a year that can't be right, a family with
+nothing to link the two, or a placeholder while placeholders are off.
+Look at every warning.
 
 ## Stage 4: lineage files, down to the living
 
@@ -231,6 +251,22 @@ that family's `inferred` and the file says why. The root sheet gets a
 ways. Records copied about people on lineage files get their record
 files, as on the sheets.
 
+## Coverage: what "all" means
+
+    python3 -I tools/check_coverage.py
+
+"Every descendant" is checked, not assumed. `check_coverage.py` reads
+every transcribed page, takes each numbered entry (a line starting
+with a generation number, "6. " or "_6_. "; the pattern is `coverage`
+in `scan2gedcom.json`) and the name at its start, and lists each
+entry with no person in `data/` of that name (given name and surname;
+middle names, quoted nicknames and `aka` spellings allowed for) who
+cites that page. It also lists every page no data file cites. **Done
+means its list is empty**, except pages known to be missing from the
+scan; once the user agrees, those go in its `skip_pages` (covers and
+blank pages are skipped already). It exits 1 while anything is
+listed. Run it after every round and before the GEDCOM.
+
 ## Stage 5: GEDCOM
 
     python3 -I tools/build_gedcom.py      # writes the file named in scan2gedcom.json
@@ -240,13 +276,58 @@ files, as on the sheets.
 The build reads sheets and lineage files alike. It gives each person
 their sheet id as `REFN`, puts the book in as one source with the PDF
 page on every citation, makes one source per record file, writes a
-person's `note` as a `NOTE`, gives an adopted child `PEDI adopted` on
-the family link and a step-child or an inferred one a `NOTE` there,
-writes Ancestry's per-parent tags (`_FREL` / `_MREL`: `Step`,
-`Natural`, `Adopted`) under the family's `CHIL` line, and marks anyone
-whose Living is `yes` or `check` with `RESN privacy`. The living are in
-the same file as everyone else. Check the file with an independent
+person's or a family's `note` as a `NOTE`, gives an adopted child
+`PEDI adopted` on the family link and a step-child or an inferred one
+a `NOTE` there, writes Ancestry's per-parent tags (`_FREL` / `_MREL`:
+`Step`, `Natural`, `Adopted`) under the family's `CHIL` line, and
+marks anyone whose Living is `yes` or `check` with `RESN privacy`.
+The living are in the same file as everyone else. Check the file with an independent
 parser before the user imports it. Import into a **private** tree.
+
+## When the rules change: sweep
+
+Rules change after sheets exist: the user decides spouses' parents go
+in as people, or moves a LIVING year. Before new work goes on, a
+**sweep** brings every existing sheet, lineage file and data file up
+to the new rules. Write the rule into `tools/DATA-FORMAT.txt` (or
+`CONVENTIONS.txt`) first; bring one sheet up yourself as the model;
+then helpers do the rest with `reference/briefs/sweep.txt`, a few
+sheets each. They add the people named only in text or notes as
+persons with the families that link them, the step, adopted and
+inferred links, notes, missing record files, and re-checked Living
+values. Data files are edited line by line, never re-dumped. Each
+helper edits only its own sheets' files and the records it makes, and
+reports any change another file needs (an identical fact in a
+parent's data, a `Used on:` line) for you to make. Commit each helper
+with `commit_helper.sh`.
+
+## Running helpers at scale
+
+When what is left is more than a few helpers' work
+(`reference/ORCHESTRATION.txt` has the detail):
+
+1. **Survey first, read only.** Size every remaining branch over the
+   whole book, starting from `check_coverage.py`'s list. A survey that
+   only follows the existing sheets down misses whole sections. Split
+   the work into units of about 12 pages or 150 numbered entries.
+2. **Group the units.** Families that share in-laws go to one helper.
+   A family shared by two branches is made in one wave; the other
+   branch goes in a later wave and reuses its ids.
+3. **Helpers write only their own files** and report the changes
+   other files need.
+4. **Commit each helper on its own:**
+   `tools/commit_helper.sh <message file> <files>` checks the files
+   alone on top of HEAD in a temporary git worktree (render, links,
+   data) and commits exactly those files only if they pass.
+5. **After each wave,** look for duplicates (one person under two ids,
+   one record in two files) and run `check_coverage.py`; at the end,
+   its list must be empty.
+6. **Data first, research after.** Every person, family, link and
+   cited fact goes in first; a puzzle gets a one-line note. Nothing
+   the book gives is dropped.
+7. **The user sets the pace.** They may cap how many helpers run at
+   once, and if they ask, nothing starts a new wave without their
+   yes.
 
 ## Keeping work safe
 

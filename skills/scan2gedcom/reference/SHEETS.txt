@@ -5,7 +5,7 @@ sheet, a lineage file and three records.
 IDS
   person   <surname>-<given>-<birth year>, lower case, a-z 0-9 and
            hyphens: harlan-abel-1801. Women by maiden surname.
-           "x" for anything unknown: pell-ruth-x, cave-x-x,
+           "x" for anything unknown: pell-ruth-x, lomax-x-x,
            harlan-unnamed-x. Add -2, -3 only if two ids would clash.
   family   fam-<husband id>-<wife id>, "x" for an unknown partner:
            fam-harlan-abel-1801-pell-ruth-1805, fam-x-harlan-lydia-1827.
@@ -14,7 +14,9 @@ IDS
            rec-1830-03-02-deed-abel-ruth-harlan-to-ezra,
            rec-harlan-family-bible.
   lineage  line-<sheet id>: line-harlan-abel-1801.
-  An id never changes once another sheet links to it.
+  An id never changes once another sheet links to it. A typed year
+  that can't be right goes in no id: use x (DATA-FORMAT.txt, HARD
+  CASES).
 
 TAGS
   Every fact line ends with its source tag and PDF pages:
@@ -99,6 +101,13 @@ RECORD FILES
     ----------------------------------------------------------------
     TEXT AS IN THE BOOK
     @@QUOTE ...
+
+  "Used on:" names every sheet and lineage file that cites the
+  record, in its text or its data. A file that starts citing a record
+  that already exists is added to its "Used on:" line and the record
+  rendered again; a helper working alongside others reports the line
+  instead, and the coordinator adds it. check_links.py warns about a
+  citing file that isn't listed.
 
   The GEDCOM builder takes the record's title from the lines after
   "RECORD" up to "Id:", and its citation from "In book:". Keep both.

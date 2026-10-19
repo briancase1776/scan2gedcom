@@ -5,5 +5,8 @@
   "project": "Harlan Family",
   "source_note": "Invented example book (6 PDF pages). Pages are cited by PDF page of the scan, as in the transcription.",
   "gedcom": "gedcom/harlan-family.ged",
-  "living_rule": {"born_by": 1915, "married_before": 1940, "child_born_before": 1940, "spouse_born_before": 1900}
+  "living_rule": {"born_by": 1915, "married_before": 1940, "child_born_before": 1940, "spouse_born_before": 1900,
+                  "grandchild_born_before": 1960, "grandchild_married_before": 1980},
+  "coverage": {"entry_pattern": "^_?\\d{1,2}_?\\.\\s+", "skip_pages": []},
+  "unnamed_placeholders": false
 }

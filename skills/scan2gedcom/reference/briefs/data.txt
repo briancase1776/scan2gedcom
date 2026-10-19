@@ -24,8 +24,9 @@ FOR EACH SHEET write data/<sheet id>.json containing:
 - each spouse, with the facts the sheet gives for them;
 - each child listed on the sheet, with birth, death and burial only;
 - one family per marriage (id fam-<husband id>-<wife id>, null for an
-  unknown partner), with MARR / DIV facts and the children in the
-  sheet's order; a child adopted by people neither of whom is their
+  unknown partner), with MARR / DIV facts, the children in the
+  sheet's order, and a "note" for what is about the family rather
+  than one event; a child adopted by people neither of whom is their
   own parent also goes in the family's "adopted", and a child the
   sheet places in the family partly or wholly by working out [I]
   (which marriage, which parent), or with a parent the book only
@@ -61,6 +62,14 @@ GUESSES: "possible", "perhaps", "rumored", or a place or date worked
 out on the sheet becomes an EVEN fact with value "Possible death" /
 "Possible burial" / "Possible birthplace" / "Rumored residence",
 never BIRT, DEAT, BURI or RESI.
+
+HARD CASES, as in DATA-FORMAT.txt: a spouse the sheet doesn't tie to
+one person goes in the likelier family, with a note saying so; a
+year that can't be right is a date phrase of the day and month, the
+book's text in "note", and an x id; a partner or an engagement is a
+family with no MARR fact and a "note"; people the book only counts
+("has 2 ch.") are counted in the parent's "note", not made people<,
+unless scan2gedcom.json has "unnamed_placeholders": true>.
 
 DATES: GEDCOM form as in DATA-FORMAT.txt. A day with no year is a
 date phrase, "(17 Sep)"; a date worked out goes as "INT <date>
