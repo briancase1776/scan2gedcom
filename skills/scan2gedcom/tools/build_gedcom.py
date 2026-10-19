@@ -131,11 +131,13 @@ for fid in sorted(families):
     if x.get("wife"): line(1, "WIFE", ind[x["wife"]])
     for c in x["children"]:
         line(1, "CHIL", ind[c])
-        if c in x["step"]:   # Ancestry / Family Tree Maker: the link to each parent
-            line(2, "_FREL", "Step" if x["step"][c] == "husband" else "Natural")
-            line(2, "_MREL", "Step" if x["step"][c] == "wife" else "Natural")
+        # Ancestry / Family Tree Maker: the link to each parent the family has
+        if c in x["step"]:
+            if x.get("husband"): line(2, "_FREL", "Step" if x["step"][c] == "husband" else "Natural")
+            if x.get("wife"): line(2, "_MREL", "Step" if x["step"][c] == "wife" else "Natural")
         elif c in x["adopted"]:
-            line(2, "_FREL", "Adopted"); line(2, "_MREL", "Adopted")
+            if x.get("husband"): line(2, "_FREL", "Adopted")
+            if x.get("wife"): line(2, "_MREL", "Adopted")
     for f in x["facts"]: fact(f)
     for n in x["notes"]: line(1, "NOTE", n)
     line(1, "REFN", fid)
