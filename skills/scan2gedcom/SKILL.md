@@ -342,3 +342,10 @@ branch without touching your index or working tree:
     git push origin "$(git commit-tree "$tree" -p HEAD -m 'WIP snapshot')":refs/heads/wip
 
 Commit verified work often, by file name, on the main branch.
+
+Your own notes go in the project too: the scratch directory is lost
+when the session or its container ends. Keep the progress note (what
+is done, what is open, every rule the user set), the briefs as you
+filled them in, and the wave plan in `work/`, and commit them at the
+start and after each wave. Check them first for anything that must
+not go in a repository: passwords, tokens, keys, email addresses.
