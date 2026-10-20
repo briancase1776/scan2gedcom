@@ -24,7 +24,7 @@ ENTRY = re.compile(cov.get("entry_pattern", r"^_?\d{1,2}_?\.\s+"))
 SKIP = set(cov.get("skip_pages", []))
 PDF = re.compile(r"PDF (\d{1,4})(?:-(\d{1,4}))?")
 ASIDE = re.compile(r"\"[^\"]*\"|“[^”]*”|\([^()]*\)|\[[^\[\]]*\]")       # nicknames, (see page 1), [?]
-END = re.compile(r"[,;:]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:[Bb]orn|[Dd]ied|[Mm]arried)\b")   # "M." is an initial, "m." married
+END = re.compile(r"[,;:]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:[Bb]orn|[Dd]ied|[Mm]arried)\b| (?=\d)")   # "M." is an initial, "m." married; a date ends a name
 DROP = {"jr", "sr", "ii", "iii", "iv", "dr", "rev", "mr", "mrs", "miss", "capt", "col"}
 UNNAMED = {"a", "an", "the", "infant", "baby", "son", "daughter", "dau", "child", "boy", "girl",
            "twin", "twins", "unnamed", "stillborn"}
@@ -51,6 +51,7 @@ for x in (x for d in data for x in d.get("people", [])):
     cur["aka"] += [words(a) for a in x.get("aka", []) if len(words(a)) >= 2]
     cur["pages"] |= pages(x)
 children = set()
+SURNAMES = {v for x in people.values() for v in x["surname"]}
 for f in (f for d in data for f in d.get("families", [])):
     children.update(f.get("children", []))
     for role in ("husband", "wife"):
@@ -64,7 +65,10 @@ def named(pid, w, pg):   # does the entry's name, a list of words, fit this pers
     if any(w and w[0] == g and s and all(v in w[1:] for v in s) for g, s in forms): return True
     # an entry giving first names only ("7. Carol Ann, b. 1941", "6. Walt
     # m. 2nd ..."): the person's given names, in order, on a page they cite
-    return pg in x["pages"] and w[:len(x["given"])] == x["given"]
+    # only when the entry names no surname found in the data ("Ann Lomax" is
+    # not Ann Harlan); all the given names, or the first few ("Carol", Carol Ann)
+    n = min(len(w), len(x["given"]))
+    return pg in x["pages"] and n > 0 and w[:n] == x["given"][:n] and not set(w[1:]) & SURNAMES
 
 for f in sorted(pathlib.Path("transcription").glob("p*.txt")):
     if not re.fullmatch(r"p\d+", f.stem): continue
