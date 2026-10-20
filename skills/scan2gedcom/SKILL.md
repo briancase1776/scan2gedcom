@@ -18,7 +18,8 @@ This skill's directory (shown when the skill loads) holds:
 
     tools/          render.py  check_data.py  check_links.py
                     check_coverage.py  build_gedcom.py  check_gedcom.py
-                    commit_helper.sh
+                    commit_helper.sh  draft_map.py  check_map.py
+                    plan_units.py  repair_pdf.py
     reference/      CONVENTIONS.txt   transcription rules
                     SHEETS.txt        group sheet, record and lineage
                                       file layout
@@ -118,7 +119,18 @@ Keep `transcription/SCAN-NOTES.txt`: missing pages (gaps in the book's
 numbering), pages scanned twice, pages out of order, pages retyped with
 differences. Hand-typed books differ from copy to copy; if the user has
 a second copy, transcribe it as a separate source (`copy2/`), never
-mixed into the first.
+mixed into the first. Keep its files as given, with a note of the book
+pages each covers; it may hold pages the first scan lacks, inserted
+pages, and readers' handwriting, so compare it page by page.
+
+A scan file that will not open may only be cut off: a scanner app that
+stopped before writing the file's end. If its page images are whole,
+`python3 -I tools/repair_pdf.py <file> <repaired>` writes the missing
+end back (page tree, cross-reference table, trailer), copying the
+images byte for byte. It is for the simple one-image-per-page layout
+such apps write, and refuses anything else. Keep the original beside
+the repaired file, and say how many pages it has against how many its
+name promises.
 
 When all pages are done, run a consistency pass over the headers only
 (Book page, Kind, Notes) with a script that never touches page bodies.
@@ -261,11 +273,47 @@ with a generation number, "6. " or "_6_. "; the pattern is `coverage`
 in `scan2gedcom.json`) and the name at its start, and lists each
 entry with no person in `data/` of that name (given name and surname;
 middle names, quoted nicknames and `aka` spellings allowed for) who
-cites that page. It also lists every page no data file cites. **Done
+cites that page. An entry giving first names only ("7. Carol Ann, b.
+1941") counts when a person with those given names cites the page; a
+capital initial ("Walt M. Lomax") is a name, while a lowercase "m." or
+"d." ends it. A typing slip in a name ("Elizbeth") is not matched: put
+the spelling in the person's `aka`. It also lists every page no data file cites. **Done
 means its list is empty**, except pages known to be missing from the
 scan; once the user agrees, those go in its `skip_pages` (covers and
 blank pages are skipped already). It exits 1 while anything is
 listed. Run it after every round and before the GEDCOM.
+
+## A contents list
+
+If the book, another copy of it, or the user has a contents list (a
+table of contents by couple, with page numbers), it is the map of the
+book, and the best survey there is. Keep the original file, and
+transcribe it into `contents/p1.txt`, `p2.txt`, ... with the usual page
+header, line for line and as typed (its slips listed in the Notes, not
+fixed). Then map it, as a directory index maps a directory:
+
+    python3 -I tools/draft_map.py . <scratch>/map    # draft + review list
+    python3 -I tools/check_map.py [--todo]
+
+`draft_map.py` finds each line's PDF page(s) (its page numbers are
+the book's own, which drift from the PDF's) and the person it names
+first: among the children of the line above it, else by name on those
+pages, choosing between namesakes by the spouse the line names. It
+only drafts. Settle what it lists for review, and check every match
+it made, by hand, into `contents/map.txt` (one line per contents line:
+`ref | no. | book | PDF | id | text`; `-` for a person not yet in the
+data, `(group)` for a line standing for several people). It can match
+the right name to the wrong person (an aunt for her niece), so read
+each match against the line above it. `check_map.py` blocks on a
+contents line with no map line or a map line that is not in the
+contents (NOENTRY, ORPHAN), an id not in the data (NOID) or a page not
+in the scan (NOPAGE), and warns where the person does not cite the
+page (NOTCITED), is not a child of the line above (NOTCHILD), or has
+no spouse in the data that the line names (NOTWED). The `-` lines and
+the NOTWED warnings are an exact to-do list of couples. When a person
+named there goes into the data, put their id on the line in the same
+commit. Pages the list does not reach (an appendix, records) still
+need a look before planning.
 
 ## Stage 5: GEDCOM
 
@@ -307,9 +355,16 @@ When what is left is more than a few helpers' work
 (`reference/ORCHESTRATION.txt` has the detail):
 
 1. **Survey first, read only.** Size every remaining branch over the
-   whole book, starting from `check_coverage.py`'s list. A survey that
-   only follows the existing sheets down misses whole sections. Split
-   the work into units of about 12 pages or 150 numbered entries.
+   whole book, starting from `check_coverage.py`'s list and the
+   contents map if there is one. A survey that only follows the
+   existing sheets down misses whole sections. Split the work into
+   units of about 12 pages or 150 numbered entries, written as PDF page
+   ranges in `work/units.txt` (`unit | wave | PDF pages | root | what`).
+   `python3 -I tools/plan_units.py [--gaps]` then counts each unit's
+   entries, missing entries and spouse gaps, and lists the pages two
+   units share and every page with missing entries that no unit
+   covers. Fix the plan until that last list holds only lines that are
+   not people (numbered deed lists and the like), and say which.
 2. **Group the units.** Families that share in-laws go to one helper.
    A family shared by two branches is made in one wave; the other
    branch goes in a later wave and reuses its ids.

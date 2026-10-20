@@ -24,7 +24,7 @@ ENTRY = re.compile(cov.get("entry_pattern", r"^_?\d{1,2}_?\.\s+"))
 SKIP = set(cov.get("skip_pages", []))
 PDF = re.compile(r"PDF (\d{1,4})(?:-(\d{1,4}))?")
 ASIDE = re.compile(r"\"[^\"]*\"|“[^”]*”|\([^()]*\)|\[[^\[\]]*\]")       # nicknames, (see page 1), [?]
-END = re.compile(r"[,;:]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:born|died|married)\b", re.I)
+END = re.compile(r"[,;:]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:[Bb]orn|[Dd]ied|[Mm]arried)\b")   # "M." is an initial, "m." married
 DROP = {"jr", "sr", "ii", "iii", "iv", "dr", "rev", "mr", "mrs", "miss", "capt", "col"}
 UNNAMED = {"a", "an", "the", "infant", "baby", "son", "daughter", "dau", "child", "boy", "girl",
            "twin", "twins", "unnamed", "stillborn"}
@@ -56,12 +56,15 @@ for f in (f for d in data for f in d.get("families", [])):
     for role in ("husband", "wife"):
         if f.get(role) in people: people[f[role]]["pages"] |= pages([f.get("facts", []), f.get("note", "")])
 
-def named(pid, w):   # does the entry's name, a list of words, fit this person?
+def named(pid, w, pg):   # does the entry's name, a list of words, fit this person?
     x, rest = people[pid], [v for v in w if v not in UNNAMED]
     if not x["given"] or all(v in UNNAMED for v in x["given"]):   # no name: an unnamed child
         return pid in children and rest in ([], x["surname"])
     forms = [(x["given"][0], x["surname"])] + [(a[0], a[-1:]) for a in x["aka"]]
-    return any(w and w[0] == g and s and all(v in w[1:] for v in s) for g, s in forms)
+    if any(w and w[0] == g and s and all(v in w[1:] for v in s) for g, s in forms): return True
+    # an entry giving first names only ("7. Carol Ann, b. 1941", "6. Walt
+    # m. 2nd ..."): the person's given names, in order, on a page they cite
+    return pg in x["pages"] and w[:len(x["given"])] == x["given"]
 
 for f in sorted(pathlib.Path("transcription").glob("p*.txt")):
     if not re.fullmatch(r"p\d+", f.stem): continue
@@ -78,7 +81,7 @@ for f in sorted(pathlib.Path("transcription").glob("p*.txt")):
         n_entries += 1
         rest = ASIDE.sub(" ", line[m.end():])
         w = words(END.split(rest, 1)[0])
-        who = [pid for pid, x in people.items() if named(pid, w)]
+        who = [pid for pid, x in people.items() if named(pid, w, pg)]
         if any(pg in people[pid]["pages"] for pid in who): continue
         if who: missing.append(f"PDF {pg}: {line.strip()[:60]}\n    {', '.join(who[:3])} has that name, but cites no PDF {pg}")
         else: missing.append(f"PDF {pg}: {line.strip()[:60]}\n    no person of that name in data/")
