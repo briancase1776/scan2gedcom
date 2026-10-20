@@ -68,7 +68,7 @@ def named(pid, w, pg):   # does the entry's name, a list of words, fit this pers
     # only when the entry names no surname found in the data ("Ann Lomax" is
     # not Ann Harlan); all the given names, or the first few ("Carol", Carol Ann)
     n = min(len(w), len(x["given"]))
-    return pg in x["pages"] and n > 0 and w[:n] == x["given"][:n] and not set(w[1:]) & SURNAMES
+    return pg in x["pages"] and n > 0 and w[:n] == x["given"][:n] and not (set(w[1:]) - set(x["given"])) & SURNAMES
 
 for f in sorted(pathlib.Path("transcription").glob("p*.txt")):
     if not re.fullmatch(r"p\d+", f.stem): continue

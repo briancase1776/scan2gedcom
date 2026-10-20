@@ -19,7 +19,7 @@ This skill's directory (shown when the skill loads) holds:
     tools/          render.py  check_data.py  check_links.py
                     check_coverage.py  build_gedcom.py  check_gedcom.py
                     commit_helper.sh  draft_map.py  check_map.py
-                    plan_units.py  repair_pdf.py
+                    plan_units.py  repair_pdf.py  check_dups.py
     reference/      CONVENTIONS.txt   transcription rules
                     SHEETS.txt        group sheet, record and lineage
                                       file layout
@@ -375,8 +375,13 @@ When what is left is more than a few helpers' work
    alone on top of HEAD in a temporary git worktree (render, links,
    data) and commits exactly those files only if they pass.
 5. **After each wave,** look for duplicates (one person under two ids,
-   one record in two files) and run `check_coverage.py`; at the end,
-   its list must be empty.
+   one record in two files): `python3 -I tools/check_dups.py --new
+   <the wave's data files>` lists people with the same names and birth
+   year, or the same names and spouse, to judge (twins and a father and
+   son are legitimate). Then run `check_coverage.py`; at the end, its
+   list must be empty. Helpers running at once can each make an id for
+   the same person: when one finishes first, commit it and tell the
+   others which ids it took.
 6. **Data first, research after.** Every person, family, link and
    cited fact goes in first; a puzzle gets a one-line note. Nothing
    the book gives is dropped.
