@@ -30,7 +30,7 @@ END = re.compile(r"[,;:]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:[Bb]orn|[Dd]ied|[
 LEAD = re.compile(r"^\s*(?:\w+'?s\s+)?(?:twins?|(?:step|adopted|foster)[ -]?(?:son|dau(?:ghter)?\.?|child)|adopted)\b\s*[-:]?\s*(?=(?-i:[A-Z]))", re.I)
 DROP = {"jr", "sr", "ii", "iii", "iv", "dr", "rev", "mr", "mrs", "miss", "capt", "col"}
 UNNAMED = {"a", "an", "the", "infant", "baby", "son", "daughter", "dau", "child", "boy", "girl",
-           "twin", "twins", "unnamed", "stillborn"}
+           "twin", "twins", "unnamed", "stillborn", "deceased"}
 
 def words(s):
     return [w for w in re.split(r"[^\w']+", ASIDE.sub(" ", s).replace("_", " ").casefold())

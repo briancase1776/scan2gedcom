@@ -40,6 +40,7 @@ for p in sorted(pathlib.Path("data").glob("*.json")):
         for k in ("children", "adopted", "inferred"):
             for c in x.get(k, []):
                 if c not in cur[k]: cur[k].append(c)
+        cur.setdefault("lists", []).append(x.get("children", []))
         cur["step"].update(x.get("step", {}))
         for f in x.get("facts", []):
             if f not in cur["facts"]: cur["facts"].append(f)
@@ -129,7 +130,10 @@ for fid in sorted(families):
     line(0, f"{fam[fid]} FAM")
     if x.get("husband"): line(1, "HUSB", ind[x["husband"]])
     if x.get("wife"): line(1, "WIFE", ind[x["wife"]])
-    for c in x["children"]:
+    # a family listed in several files: its children in the order of the
+    # longest list (a sheet gives them all, in birth order), then the rest
+    best = max(x["lists"], key=len)
+    for c in best + [c for c in x["children"] if c not in best]:
         line(1, "CHIL", ind[c])
         # Ancestry / Family Tree Maker: the link to each parent the family has
         if c in x["step"]:
