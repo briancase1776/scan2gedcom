@@ -24,13 +24,14 @@ ENTRY = re.compile(cov.get("entry_pattern", r"^_?\d{1,2}_?\.\s+"))
 SKIP = set(cov.get("skip_pages", []))
 PDF = re.compile(r"PDF (\d{1,4})(?:-(\d{1,4}))?")
 ASIDE = re.compile(r"\"[^\"]*\"|“[^”]*”|\([^()]*\)|\[[^\[\]]*\]")       # nicknames, (see page 1), [?]
-END = re.compile(r"[,;:]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:[Bb]orn|[Dd]ied|[Mm]arried)\b| (?=\d)")   # "M." is an initial, "m." married; a date ends a name
+END = re.compile(r"[,;:|]| - | (?:b|d|m|md|mar|bur|dau|s)\.| (?:[Bb]orn|[Dd]ied|[Mm]arried)\b| (?=\d)")   # "M." is an initial, "m." married; a date ends a name
 # a label before the name: "Twin- Ada", "twins Carl", "Step Son - Hugh", "Johns step son
 # Otto", "Adopted son Paul"
 LEAD = re.compile(r"^\s*(?:\w+'?s\s+)?(?:twins?|(?:step|adopted|foster)[ -]?(?:son|dau(?:ghter)?\.?|child)|adopted)\b\s*[-:]?\s*(?=(?-i:[A-Z]))", re.I)
 DROP = {"jr", "sr", "ii", "iii", "iv", "dr", "rev", "mr", "mrs", "miss", "capt", "col"}
 UNNAMED = {"a", "an", "the", "infant", "baby", "son", "daughter", "dau", "child", "boy", "girl",
-           "twin", "twins", "unnamed", "stillborn", "deceased"}
+           "twin", "twins", "unnamed", "stillborn", "deceased",
+           "boys", "girls", "one", "not", "named"}
 
 def words(s):
     return [w for w in re.split(r"[^\w']+", ASIDE.sub(" ", s).replace("_", " ").casefold())
@@ -86,7 +87,8 @@ for f in sorted(pathlib.Path("transcription").glob("p*.txt")):
         m = ENTRY.match(line)
         if not m: continue
         n_entries += 1
-        rest = LEAD.sub("", ASIDE.sub(" ", line[m.end():]), count=1)
+        rest = re.sub(r"^\d{1,2}\.\s+", "", ASIDE.sub(" ", line[m.end():]))   # "6. 6. Ann" typed twice
+        rest = LEAD.sub("", rest, count=1)
         w = words(END.split(rest, 1)[0])
         who = [pid for pid, x in people.items() if named(pid, w, pg)]
         if any(pg in people[pid]["pages"] for pid in who): continue
