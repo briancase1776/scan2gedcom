@@ -224,6 +224,23 @@ Rules that matter most:
 - Names exactly as typed for each person. A family's name typed two
   ways stays two ways, listed under the disagreements; surnames are
   never normalized.
+- **A passage typed twice is entered once.** Books retype a page, a
+  family or a summary list later in fuller form. One person, one
+  marriage, citing every page; the differences go in notes and under
+  the disagreements. Never enter the second copy as new people.
+- **Old calendars.** Quaker minutes number the months ("1752-12-2"),
+  and before 1752 their year began in March (12th month = February).
+  Enter dates as typed, never silently converted: a month name as
+  typed; a numbered date from 1752 on as `INT 2 DEC 1752 (1752-12-2)`;
+  a numbered date before 1752 as a date phrase, `(1750-12-5)`, with
+  the reckoning in an [I] note. Meeting events (received on
+  certificate, disowned, reported married) are `EVEN` facts naming the
+  meeting.
+- **Marks on names.** A name typed with an asterisk or other sign is
+  entered without it, the person's note saying how it was typed. List
+  every marked name in `work/` with its page and id, and look for what
+  the book says the mark means (often: people who supplied the
+  research). Ask the user before reading meaning into it.
 - The files are laid out one fact per line. Edit lines; never load a
   file and dump it back with a JSON library, which rewrites every line
   and hides the change in the diff.
@@ -367,9 +384,21 @@ When what is left is more than a few helpers' work
    not people (numbered deed lists and the like), and say which.
 2. **Group the units.** Families that share in-laws go to one helper.
    A family shared by two branches is made in one wave; the other
-   branch goes in a later wave and reuses its ids.
+   branch goes in a later wave and reuses its ids. To run them in the
+   same wave instead, put a **shared-id table** in the brief: the id,
+   given name, surname and sex of every person two units will both
+   touch, and which unit places them. Each unit lists those people (and
+   any family it adds children to) in its own file with only its own
+   pages' facts; `check_data.py` and the builder accept a person or a
+   family in several files when the id, sex, surname and couple agree,
+   and merge them. Read the pages that join the units before writing
+   the table: a list of children at the end of one entry can belong to
+   a different parent than the next entry.
 3. **Helpers write only their own files** and report the changes
-   other files need.
+   other files need. A unit with only records (wills, deeds, estate
+   papers) gets its own data file, `data/records-<sheet-id>.json`,
+   with a text page listing the records and whom each names, so its
+   facts never land in another unit's file.
 4. **Commit each helper on its own:**
    `tools/commit_helper.sh <message file> <files>` checks the files
    alone on top of HEAD in a temporary git worktree (render, links,
@@ -388,6 +417,12 @@ When what is left is more than a few helpers' work
 7. **The user sets the pace.** They may cap how many helpers run at
    once, and if they ask, nothing starts a new wave without their
    yes.
+8. **An interrupt can stop the helpers.** In Claude Code, stopping the
+   main session's turn can end background helpers too. Tell the user
+   to send a message rather than press stop while helpers run. A
+   helper whose transcript has not moved for far longer than the
+   others took has probably been stopped: check its last entry, and if
+   it was interrupted, relaunch it on the same brief.
 
 ## Keeping work safe
 
